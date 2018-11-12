@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Search</title>
+</head>
+<body>
+  <div id="search-root">
+    <form action="/search" method="post" >
+      <input id="search-item-textbox" type="textbox" name="itemName">
+      <input id="search-item-btn" type="submit" value="Find">
+    </form>
+    <div id="search-results-container">
+      {{#searchResults}}
+        <div class="search-result-container">
+          <div class="item-title"> {{ beer_name }} </div>
+          <div class="item-style">  Style: {{ beer_style }} </div>
+          <div class="item-abv"> ABV: {{ beer_abv }} </div>
+          <div class="item-review"> Rating: {{ review_overall }} </div>
+          <div class="item-brewery"> Brewery: {{ brewery_name }} </div>
+        </div>
+      {{/searchResults}}
+    </div>
+  </div>
+</body>
+</html>
