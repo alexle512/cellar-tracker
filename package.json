@@ -1,37 +1,19 @@
 {
-  "name": "cellar-tracker",
+  "name": "cellarproject",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ttlekich/cellar-tracker.git"
-  },
-  "keywords": [],
-  "author": "",
+  "author": "arlisha hayles",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ttlekich/cellar-tracker/issues"
-  },
-  "homepage": "https://github.com/ttlekich/cellar-tracker#readme",
   "dependencies": {
-    "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
-    "dotenv": "^6.1.0",
     "express": "^4.16.4",
-    "mustache": "^3.0.0",
+    "express-session": "^1.15.6",
     "mustache-express": "^1.2.8",
     "pg": "^7.6.1",
-    "pg-hstore": "^2.3.2",
-    "sequelize": "^4.41.1",
-    "uuid": "^3.3.2"
-  },
-  "devDependencies": {
-    "nodemon": "^1.18.6",
-    "sequelize-cli": "^5.3.0"
+    "sequelize": "^4.41.1"
   }
 }

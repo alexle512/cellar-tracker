@@ -1,37 +1,57 @@
-/**
- * Imports
- */
-const express = require("express")
-const path = require("path")
-const bodyParser = require("body-parser")
-const mustacheExpress = require("mustache-express")
-
-const search = require("./routes/search")
-
-/**
- * Init
- */
+const express = require('express')
 const app = express()
-app.engine("mustache", mustacheExpress())
+const mustacheExpress = require('mustache-express')
+const models = require('./models')
+const bodyParser = require('body-parser')
+const port = 3000
+app.engine('mustache',mustacheExpress())
+app.set('views','./views')
+app.set('view engine','mustache')
 
-// View Engine
-app.set("views", path.join(__dirname, "views"))
-app.set("view engine", "mustache")
+app.use(bodyParser.urlencoded({ extended: false}))
 
-// body-parser
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
 
-// Public Files
-app.use(express.static(path.join(__dirname, "public")))
 
-/**
- * Custon Middleware
- */
+let cellar = models.wishlist.build({
+  beverage: 'Stolichnaya Elit',
+  price: 25.00,
+  notes: 'Graduation Party'
+})
+//   cellar.save().then(function(){
+// })
 
-/**
- * Route Config
- */
-app.use("/search", search)
 
-module.exports = app
+app.get('/cellar', function(req,res){
+  models.cellar.findAll().then(function(cellers){
+    res.render('cellar', {lists: cellers})
+  })
+})
+
+app.get('/favorites', function(req, res) {
+  models.favorite.findAll().then(function(favorites) {
+    res.render('favorites', {favorites: favorites})
+   })
+})
+
+app.get('/wishlist', function(req,res){
+  models.wishlist.findAll().then(function(wishlists){
+    res.render('wishlist', {wishlists: wishlists})
+  })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.listen(port, function(req,res) {
+  console.log(" Welcome Back to Coding......")
+})

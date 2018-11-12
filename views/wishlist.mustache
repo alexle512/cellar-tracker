@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>My Favorites</title>
+  </head>
+  <body>
+    <a href="/favorites"><h3> My Favorites </h3></a>
+    <a href="/cellar"><h3> My Cellar </h3></a>
+    <a href="/wishlist"><h3> My Wishlist</h3></a>
+
+    <h1> My Wish List </h1>
+
+    <ul>
+      {{#wishlists}}
+        <li>{{beverage}}</li>
+        <label>${{price}}</label>
+        <label>Notes: {{notes}} </label>
+      {{/wishlists}}
+
+    </ul>
+  </body>
+</html>
