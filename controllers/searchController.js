@@ -15,8 +15,11 @@ const beerReviews = require("../models/beerreviews")(
   sequelize,
   Sequelize.DataTypes
 )
-
-let searchResults = []
+const wineReviews = require("../models/winedata")(
+  sequelize,
+  Sequelize.DataTypes
+)
+let searchResults = { beers: [], wines: [], spirits: [] }
 
 const displaySearch = async (req, res) => {
   res.render("search", { searchResults })
@@ -24,11 +27,15 @@ const displaySearch = async (req, res) => {
 
 const querySearch = async (req, res) => {
   const itemName = req.body.itemName
-  const beers = await beerReviews.findAll({
-    where: { beer_name: { $ilike: `%${itemName}%` } }
-  })
-  searchResults = beers
-  console.log(searchResults.lengthk)
+  const beers =
+    (await beerReviews.findAll({
+      where: { beer_name: { $ilike: `%${itemName}%` } }
+    })) || []
+  const wines =
+    (await wineReviews.findAll({
+      where: { title: { $ilike: `%${itemName}%` } }
+    })) || []
+  searchResults = { beers, wines }
   res.redirect("/search")
 }
 
