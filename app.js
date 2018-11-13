@@ -10,8 +10,6 @@ app.set('view engine','mustache')
 
 app.use(bodyParser.urlencoded({ extended: false}))
 
-
-
 let cellar = models.wishlist.build({
   beverage: 'Stolichnaya Elit',
   price: 25.00,
@@ -32,6 +30,26 @@ app.get('/favorites', function(req, res) {
     res.render('favorites', {favorites: favorites})
    })
 })
+
+app.post('/delete-wishlist', function(req, res){
+
+  let id = req.body.wishlistId
+  console.log(id);
+
+  models.wishlist.findById(id).then(function(wishlist){
+
+  wishlist.destroy()
+
+    res.render('delete-wishlist', {beverage: wishlist.beverage})
+  })
+
+
+
+  // wishlist = wishlist.filter(function(list) {
+  //   return list.beverage != beverage
+  })
+
+
 
 app.get('/wishlist', function(req,res){
   models.wishlist.findAll().then(function(wishlists){

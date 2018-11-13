@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Update Wishlist</title>
+  </head>
+  <body>
+<form action="/updated-wishlist/:id" method="POST">
+  <input type="hidden" name="wishlistId" value="{{id}}" />
+  <input type="text" name="beverage" value="{{beverage}}" />
+  <input type="number" name="price" value="{{price}}" />
+  <input type="text" name="notes"
+  value="{{notes}}" />
+  <input type="submit" value="Submit" />
+</form>
+  </body>
+</html>
