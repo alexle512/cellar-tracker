@@ -37,6 +37,23 @@
           </div>
         </div>
       {{/searchResults.beers}}
+      {{#searchResults.beers}}
+        <div class="search-result-container">
+          <div class="item-title"> {{ beer_name }} </div>
+          <div class="item-style">  Style: {{ beer_style }} </div>
+          <div class="item-abv"> ABV: {{ beer_abv }} </div>
+          <div class="item-review"> Rating: {{ review_overall }} </div>
+          <div class="item-brewery"> Brewery: {{ brewery_name }} </div>
+          <div class="item-add-container">
+            <form id="item-add-review" action="" method="post" >
+              <input class="item-add-btn" type="submit" value="Review">
+            </form>
+            <form id="item-add-cellar" action="" method="post" >
+              <input class="item-add-btn" type="submit" value="Add to Cellar">
+            </form>
+          </div>
+        </div>
+      {{/searchResults.beers}}
     </div>
     </div>
   </div>

@@ -1,0 +1,35 @@
+<html>
+<head><head>
+<body>
+
+<form action="/reviews" method="POST">
+  Product:<br>
+  <input type="text" name="product" >
+  <br>
+  Rating (1-5):<br>
+  <input type="integer" name="rating">
+  <br><br>
+  Category:<br>
+  <select>
+  <option value="spirit">Spirit</option>
+  <option value="wine">Wine</option>
+  <option value="beer">Beer</option>
+  <option value="other">Other</option>
+</select>
+  <input type="submit" value="Submit">
+</form> 
+
+<ul id="reviewsTable" >
+{{#reviews}}
+    <li>
+    {{product}}
+    {{rating}}
+    {{category}}
+    </li>
+{{/reviews}}
+
+</ul>
+
+
+</body>
+</html>
