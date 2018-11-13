@@ -4,24 +4,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/search.css">
   <title>Search</title>
 </head>
 <body>
   <div id="search-root">
-    <form action="/search" method="post" >
+    <div id="search-container">
+    <form id="search-form" action="/search" method="post" >
       <input id="search-item-textbox" type="textbox" name="itemName">
       <input id="search-item-btn" type="submit" value="Find">
     </form>
+    <div id="search-filters">
+      <input name="filter-beer" type="button" value="Beer">
+      <input name="filter-spirits" type="button" value="Spirits">
+      <input name="filter-wine" type="button" value="Wine">
+    </div>
     <div id="search-results-container">
-      {{#searchResults}}
+      {{#searchResults.beers}}
         <div class="search-result-container">
           <div class="item-title"> {{ beer_name }} </div>
           <div class="item-style">  Style: {{ beer_style }} </div>
           <div class="item-abv"> ABV: {{ beer_abv }} </div>
           <div class="item-review"> Rating: {{ review_overall }} </div>
           <div class="item-brewery"> Brewery: {{ brewery_name }} </div>
+          <div class="item-add-container">
+            <form id="item-add-review" action="" method="post" >
+              <input class="item-add-btn" type="submit" value="Review">
+            </form>
+            <form id="item-add-cellar" action="" method="post" >
+              <input class="item-add-btn" type="submit" value="Add to Cellar">
+            </form>
+          </div>
         </div>
-      {{/searchResults}}
+      {{/searchResults.beers}}
+      {{#searchResults.beers}}
+        <div class="search-result-container">
+          <div class="item-title"> {{ beer_name }} </div>
+          <div class="item-style">  Style: {{ beer_style }} </div>
+          <div class="item-abv"> ABV: {{ beer_abv }} </div>
+          <div class="item-review"> Rating: {{ review_overall }} </div>
+          <div class="item-brewery"> Brewery: {{ brewery_name }} </div>
+          <div class="item-add-container">
+            <form id="item-add-review" action="" method="post" >
+              <input class="item-add-btn" type="submit" value="Review">
+            </form>
+            <form id="item-add-cellar" action="" method="post" >
+              <input class="item-add-btn" type="submit" value="Add to Cellar">
+            </form>
+          </div>
+        </div>
+      {{/searchResults.beers}}
+    </div>
     </div>
   </div>
 </body>

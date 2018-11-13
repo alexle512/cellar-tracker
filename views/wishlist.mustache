@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>My Favorites</title>
+  </head>
+  <body>
+    <a href="/favorites"><h3> My Favorites </h3></a>
+    <a href="/cellar"><h3> My Cellar </h3></a>
+    <a href="/wishlist"><h3> My Wishlist</h3></a>
+
+    <h1> My Wish List </h1>
+
+    <ul>
+      {{#wishlists}}
+        <li><strong>{{beverage}}</strong></li>
+        <li>${{price}}</li>
+        <li>Notes: {{notes}} </li>
+      <form action="/delete-wishlist" method="POST">
+        <input type="hidden" name="wishlistId"
+        value="{{id}}" />
+        <input type="submit" value="Remove" />
+      </form>
+      <form action="/update-wishlist" method="POST">
+        <input type="hidden" name="wishlistId" value="{{id}}" />
+        <input type="submit" value="Update" />
+      {{/wishlists}}
+
+    </ul>
+  </body>
+</html>

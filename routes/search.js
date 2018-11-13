@@ -21,6 +21,5 @@ router
   .route("/")
   .get(displaySearch)
   .post(querySearch)
-//.post(querySearch)
 
 module.exports = router
