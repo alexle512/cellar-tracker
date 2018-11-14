@@ -5,13 +5,23 @@
     <title>Update Wishlist</title>
   </head>
   <body>
-<form action="/updated-wishlist/:id" method="POST">
-  <input type="hidden" name="wishlistId" value="{{id}}" />
-  <input type="text" name="beverage" value="{{beverage}}" />
-  <input type="number" name="price" value="{{price}}" />
-  <input type="text" name="notes"
-  value="{{notes}}" />
-  <input type="submit" value="Submit" />
+    <a href="/favorites"><h3> My Favorites </h3></a>
+    <a href="/cellar"><h3> My Cellar </h3></a>
+    <a href="/wishlist"><h3> My Wishlist</h3></a>
+
+    Enter the Updated Information 
+
+    <form action="/update-wishlist" method="POST">
+      <input type="hidden" name="wishlistId" value="{{id}}" />
+      <input type="text" name="beverage" value="{{beverage}}" />
+    </br>
+      <input type="number" name="price" value="{{price}}" />
+    </br>
+      <input type="text" name="notes"
+      value="{{notes}}" />
+    </br>
+      <input type="submit" value="Update" />
+    </br>
 </form>
   </body>
 </html>

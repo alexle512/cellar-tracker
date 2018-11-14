@@ -17,7 +17,11 @@ let cellar = models.wishlist.build({
 })
 //   cellar.save().then(function(){
 // })
-
+app.get('/wishlist', function(req,res){
+  models.wishlist.findAll().then(function(wishlists){
+    res.render('wishlist', {wishlists: wishlists})
+  })
+})
 
 app.get('/cellar', function(req,res){
   models.cellar.findAll().then(function(cellers){
@@ -34,35 +38,61 @@ app.get('/favorites', function(req, res) {
 app.post('/delete-wishlist', function(req, res){
 
   let id = req.body.wishlistId
-  console.log(id);
 
   models.wishlist.findById(id).then(function(wishlist){
 
   wishlist.destroy()
 
     res.render('delete-wishlist', {beverage: wishlist.beverage})
+
+    })
+
   })
 
+ app.post('/update-wishlist', function(req, res) {
 
+   let id = req.body.wishlistId
 
-  // wishlist = wishlist.filter(function(list) {
-  //   return list.beverage != beverage
+   let beverage = req.body.beverage
+
+   let price = parseFloat(req.body.price)
+
+   let notes = req.body.notes
+
+   models.wishlist.findById(id).then(function(wishlist){
+     wishlist.update({
+       beverage: beverage,
+       price : price,
+       notes : notes
+     }).then(function(){
+
+        res.render('update-wishlist')
+     })
+
+   })
+
+ })
+
+app.get('/update-wishlist/:id', function(req, res) {
+
+  let id = req.params.id
+
+  models.wishlist.findById(id).then(function(wishlist){
+    res.render('update-wishlist',{id: wishlist.id,beverage: wishlist.beverage, price: wishlist.price, notes: wishlist.notes})
   })
 
-
-
-app.get('/wishlist', function(req,res){
-  models.wishlist.findAll().then(function(wishlists){
-    res.render('wishlist', {wishlists: wishlists})
-  })
+  //res.render('update-wishlist',{wishlistId: id})
+  /*
+  models.wishlist.findById(id).then(function(wishlist) {
+    wishlist.update({
+      beverage: beverage,
+      price: price,
+      notes : notes
+    }).then(function(updateWishlist){
+      res.render('wishlist')
+    })
+  }) */
 })
-
-
-
-
-
-
-
 
 
 
