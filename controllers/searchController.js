@@ -11,15 +11,23 @@ const sequelize = new Sequelize(
     dialect: "postgres"
   }
 )
-const beerReviews = require("../models/beerreviews")(
-  sequelize,
-  Sequelize.DataTypes
-)
-const wineReviews = require("../models/winedata")(
-  sequelize,
-  Sequelize.DataTypes
-)
+const beerDB = require("../models/beer")(sequelize, Sequelize.DataTypes)
+const wineDB = require("../models/wine")(sequelize, Sequelize.DataTypes)
+
 let searchResults = { beers: [], wines: [], spirits: [] }
+
+let allWines = []
+let allBeers = []
+
+/**
+ * Fetch From Database on Server Load
+ */
+const onLoad = async () => {
+  allWines = await wineDB.findAll()
+  allBeers = await beerDB.findAll()
+}
+onLoad()
+// End Fetch From db on server load
 
 const displaySearch = async (req, res) => {
   res.render("search", { searchResults })
@@ -27,14 +35,30 @@ const displaySearch = async (req, res) => {
 
 const querySearch = async (req, res) => {
   const itemName = req.body.itemName
-  const beers =
-    (await beerReviews.findAll({
-      where: { beer_name: { $ilike: `%${itemName}%` } }
-    })) || []
-  const wines =
-    (await wineReviews.findAll({
-      where: { title: { $ilike: `%${itemName}%` } }
-    })) || []
+  /**
+   * Fetch From Database / Search
+   */
+  // const beers =
+  //   (await beerDB.findAll({
+  //     where: { beer_name: { $ilike: `%${itemName}%` } }
+  //   })) || []
+  // const wines =
+  //   (await wineDB.findAll({
+  //     where: { title: { $ilike: `%${itemName}%` } }
+  //   })) || []
+  /**
+   * Fetch From Database on Server Load
+   */
+  const wines = allWines.filter(
+    wine =>
+      wine.title.toUpperCase().includes(itemName.toUpperCase()) ||
+      wine.winery.toUpperCase().includes(itemName.toUpperCase())
+  )
+  const beers = allBeers.filter(
+    beer =>
+      beer.beerName.toUpperCase().includes(itemName.toUpperCase()) ||
+      beer.breweryName.toUpperCase().includes(itemName.toUpperCase())
+  )
   searchResults = { beers, wines }
   res.redirect("/search")
 }
