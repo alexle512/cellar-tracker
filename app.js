@@ -44,10 +44,17 @@ let cellar = models.wishlist.build({
   price: 25.0,
   notes: "Graduation Party"
 })
+//   cellar.save().then(function(){
+// })
+app.get('/wishlist', function(req,res){
+  models.wishlist.findAll().then(function(wishlists){
+    res.render('wishlist', {wishlists: wishlists})
+  })
+})
 
-app.get("/cellar", function(req, res) {
-  models.cellar.findAll().then(function(cellers) {
-    res.render("cellar", { lists: cellers })
+app.get('/cellar', function(req,res){
+  models.cellar.findAll().then(function(cellers){
+    res.render('cellar', {lists: cellers})
   })
 })
 
@@ -59,50 +66,50 @@ app.get("/favorites", function(req, res) {
 
 app.post("/delete-wishlist", function(req, res) {
   let id = req.body.wishlistId
-  console.log(id)
 
   models.wishlist.findById(id).then(function(wishlist) {
     wishlist.destroy()
 
-    res.render("delete-wishlist", { beverage: wishlist.beverage })
-  })
-})
+    res.render('delete-wishlist', {beverage: wishlist.beverage})
 
-app.get("/wishlist", function(req, res) {
-  models.wishlist.findAll().then(function(wishlists) {
-    res.render("wishlist", { wishlists: wishlists })
-  })
-})
-
-// Reviews
-const review = models.review.build({
-  rating: 4,
-  product: "Johnnie Walker",
-  category: "Whiskey"
-})
-
-app.get("/reviews", function(req, res) {
-  models.review.findAll().then(function(reviews) {
-    res.render("index", { reviews: reviews })
-  })
-})
-
-app.post("/reviews", function(req, res) {
-  let product = req.body.product
-  let rating = req.body.rating
-  let category = req.body.category
-  const review = models.review.build({
-    rating: rating,
-    product: product,
-    category: category
-  })
-
-  // saving review
-  review.save().then(function(newReview) {
-    models.review.findAll().then(function(reviews) {
-      res.render("index", { reviews: reviews })
     })
+
   })
+})
+
+ app.post('/update-wishlist', function(req, res) {
+
+   let id = req.body.wishlistId
+
+   let beverage = req.body.beverage
+
+   let price = parseFloat(req.body.price)
+
+   let notes = req.body.notes
+
+   models.wishlist.findById(id).then(function(wishlist){
+     wishlist.update({
+       beverage: beverage,
+       price : price,
+       notes : notes
+     }).then(function(){
+
+        res.render('update-wishlist')
+     })
+
+   })
+
+ })
+
+app.get('/update-wishlist/:id', function(req, res) {
+
+  let id = req.params.id
+
+  models.wishlist.findById(id).then(function(wishlist){
+    res.render('update-wishlist',{id: wishlist.id,beverage: wishlist.beverage, price: wishlist.price, notes: wishlist.notes})
+  })
+
+
 })
 
 module.exports = app

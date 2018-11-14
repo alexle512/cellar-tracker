@@ -21,9 +21,7 @@
         value="{{id}}" />
         <input type="submit" value="Remove" />
       </form>
-      <form action="/update-wishlist" method="POST">
-        <input type="hidden" name="wishlistId" value="{{id}}" />
-        <input type="submit" value="Update" />
+        <a href="/update-wishlist/{{id}}"> Update </a>
       {{/wishlists}}
 
     </ul>

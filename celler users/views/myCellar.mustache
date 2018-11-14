@@ -1,42 +1,63 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!DOCTYPE html>
+<html class="text-center text-sm-center text-md-center text-lg-center text-xl-center">
 
-    <link rel="stylesheet" type="text/css" href="portal.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+<head>
     <title>myCellar Portal</title>
-  </head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Getting Started</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alfa+Slab+One">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amiri">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+
+<body style="background-color: rgb(98,63,63);background-image: url('https://images.unsplash.com/photo-1519092796169-bb9cc75a4b68?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2a093dfa81e22a74dd1809d1923059d9&auto=format&fit=crop&w=800&q=60');background-size: cover;background-position: center;">
+
+  <div class="container" style="margin-top: 5%;">
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-3">
+		    <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    	<span id="search_concept">Filter by</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#contains">Contains</a></li>
+                      <li><a href="#its_equal">It's equal</a></li>
+                      <li><a href="#greather_than">Greather than ></a></li>
+                      <li><a href="#less_than">Less than < </a></li>
+                      <li class="divider"></li>
+                      <li><a href="#all">Anything</a></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="search_param" value="all" id="search_param">
+                <input type="text" class="form-control" name="x" placeholder="Beverage Title...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div>
+        </div>
+	</div>
+</div>
 
 
-  <body>
+        <div id='links' style="margin-top:3%;">
+            <section style="background-repeat: no-repeat;background-size: cover;">
+                <div class="col" style="margin-top:3%;margin-bottom: 3%;" style="text-align: -webkit-center"><a href="#/mycellar" style="color: #ffc312;font-size: 60px;padding-right: auto;padding-left: auto;width: 16px;margin: 0;margin-left: 0;font-family: Amiri, serif;">myCellar</a></div>
 
-    <div id='portal'>
-    <div id="logo" class="container-fluid">
-    </div>
-    <div class="container-fluid">
-      <a href="/mycellar">myCellar</a>
-    </div>
-    <div class="container-fluid">
-      <a href="/myreviews">myReviews</a>
-    </div>
-    <div class="container-fluid">
-      <a href="/myprofile">myProfile</a>
-    </div>
-    <div class="container-fluid">
-      <button type="button" class="btn btn-warning">Sign Out</button>
-    </div>
-  </div>
-  </body>
+                <div class="col" style="margin-top:3%;margin-bottom: 3%;" style="text-align: -webkit-center"><a href="#/myreviews" style="font-size: 60px;font-family: Amiri, serif;color: rgb(255,195,18);">myReviews</a></div>
 
+                <div class="col" style="margin-top:3%;margin-bottom: 1%;" style="text-align: -webkit-center"><a href="#/myprofile" style="font-size: 60px;font-family: Amiri, serif;color: rgb(255,195,18);">myProfile</a></div><button class="btn btn-primary text-uppercase" type="button" style="font-family: Amiri, serif; font-size: 40px; margin-top: 5%;width: 25%;color: rgb(255,255,255); text-align: -webkit-center" ;">Sign Out</button>
+              </section>
 
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        </div>
+    <!-- </div> -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
 </html>
