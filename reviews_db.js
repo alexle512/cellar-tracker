@@ -40,7 +40,7 @@ app.get('/reviews', function (req,res){
 
     models.review.findAll().then(function(reviews){
 
-        res.render('index',{reviews : reviews})
+        res.render('review',{reviews : reviews})
     })
     
 })
@@ -67,7 +67,7 @@ app.post('/reviews', function (req,res){
 review.save().then(function(newReview){
     models.review.findAll().then(function(reviews){
 
-        res.render('index',{reviews : reviews})
+        res.render('review',{reviews : reviews})
     })
 })
 })
