@@ -13,6 +13,7 @@ const sequelize = new Sequelize(
 )
 const beerDB = require("../models/beer")(sequelize, Sequelize.DataTypes)
 const wineDB = require("../models/wine")(sequelize, Sequelize.DataTypes)
+const whiskyDB = require("../models/whisky")(sequelize, Sequelize.DataTypes)
 
 let searchResults = { beers: [], wines: [], spirits: [] }
 
