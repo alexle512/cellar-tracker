@@ -5,10 +5,7 @@ const bodyParser = require('body-parser')
 const pgp = require('pg-promise')()
 const models = require('./models')
 
-// PICTURE UPLOAD
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
-// PICTURE UPLOAD
+
 const app = express()
 const PORT = 3000
 
@@ -62,15 +59,14 @@ app.post('/login',function(req,res){
 
 })
 
-app.post('/register', upload.single('userIMG'),function(req,res){
+app.post('/register',function(req,res){
 
   let firstName = req.body.firstName
   let lastName = req.body.lastName
   let username = req.body.username
   let email = req.body.email
   let password = req.body.password
-  let userIMG = req.file.userIMG
-  console.log(userIMG)
+
 
   // find if the username has already been registered
   models.users_database.findOne({
@@ -90,7 +86,6 @@ app.post('/register', upload.single('userIMG'),function(req,res){
         email: email,
         first_name: firstName,
         last_name: lastName,
-        picture: userIMG
       })
 
       userToSave.save().then(function(newUser){
