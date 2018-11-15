@@ -70,7 +70,7 @@ app.post("/delete-wishlist", function(req, res) {
 
     res.render("delete-wishlist", { beverage: wishlist.beverage })
   })
-
+})
 
 app.post("/update-wishlist", function(req, res) {
   let id = req.body.wishlistId
