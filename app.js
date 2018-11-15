@@ -39,12 +39,10 @@ app.use("/search", search)
 
 // CELLAR
 
-let cellar = models.wishlist.build({
-  beverage: "Stolichnaya Elit",
-  price: 25.0,
-  notes: "Graduation Party"
-})
-//   cellar.save().then(function(){
+// let cellar = models.wishlist.build({
+//   beverage: "Stolichnaya Elit",
+//   price: 25.0,
+//   notes: "Graduation Party"
 // })
 app.get("/wishlist", function(req, res) {
   models.wishlist.findAll().then(function(wishlists) {
