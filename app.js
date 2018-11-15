@@ -100,8 +100,8 @@ app.post("/register", function(req, res) {
           username: username,
           password: password,
           email: email,
-          first_name: firstName,
-          last_name: lastName
+          firstname: firstName,
+          lastname: lastName
         })
 
         userToSave.save().then(function(newUser) {
@@ -122,6 +122,7 @@ app.get("/register", function(req, res) {
 app.get("/", function(req, res) {
   res.render("login")
 })
+
 // SEARCH
 app.use("/search", search)
 
@@ -193,6 +194,18 @@ app.get("/update-wishlist/:id", function(req, res) {
       notes: wishlist.notes
     })
   })
+})
+
+// Reviews
+app.get("/reviews", function(req, res) {
+  models.review.findAll().then(function(reviews) {
+    res.render("review", { reviews: reviews })
+  })
+})
+app.post("/reviews", function(req, res) {
+  let product = req.body.product
+  let rating = req.body.rating
+  let category = req.body.category
 })
 
 module.exports = app

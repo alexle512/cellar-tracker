@@ -38,32 +38,43 @@ const querySearch = async (req, res) => {
   searchResults = { beers: [], wines: [], whisky: [] }
   const limit = 20
   let offset = 0
-  /**
-   * Fetch From Database / Search
-   */
+
+  // Fetch From Database / Search
   if (itemName.trim() !== "") {
-    const beers = (await beerDB.findAndCountAll({
-      where: {
-        beer_name: { $ilike: `%${itemName}%` }
-      },
-      limit: limit,
-      offset: offset
-    })) || [(rows = [])]
-    const wines = (await wineDB.findAndCountAll({
-      where: { title: { $ilike: `%${itemName}%` } },
-      limit: limit,
-      offset: offset
-    })) || [(rows = [])]
-    searchResults = { beers: beers.rows, wines: wines.rows, whisky: [] }
+    const beers = await searchBeers(itemName, limit, offset)
+    const wines = await searchWines(itemName, limit, offset)
+    const whisky = await searchWhisky(itemName, limit, offset)
+    searchResults = {
+      beers: beers.rows,
+      wines: wines.rows,
+      whisky: whisky.rows
+    }
   }
   res.redirect(`/search/${type}`)
 }
 
-const searchBeers = async (req, res) => {}
+const searchBeers = async (query, limit, offset) =>
+  (await beerDB.findAndCountAll({
+    where: {
+      beer_name: { $ilike: `%${query}%` }
+    },
+    limit: limit,
+    offset: offset
+  })) || [(rows = [])]
 
-const searchWines = async (req, res) => {}
+const searchWines = async (query, limit, offset) =>
+  (await wineDB.findAndCountAll({
+    where: { title: { $ilike: `%${query}%` } },
+    limit: limit,
+    offset: offset
+  })) || [(rows = [])]
 
-const searchSpirits = async (req, res) => {}
+const searchWhisky = async (query, limit, offset) =>
+  (await whiskyDB.findAndCountAll({
+    where: { whisky: { $ilike: `%${query}%` } },
+    limit: limit,
+    offset: offset
+  })) || [(rows = [])]
 
 const fetchFromInit = () => {
   const wines = allWines.filter(

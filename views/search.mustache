@@ -136,6 +136,56 @@
           </div>
         {{/searchResults.wines}}
         </div>
+
+        <div class="search-results" data-results="whisky" style="display: none;">
+        {{#searchResults.whisky}}
+          <div class="search-result-container">
+
+            <div class="search-info-container">
+              <div class="item-image">
+                <i class="fas fa-glass-martini fa-3x"></i>
+              </div>
+              <div class="item-title-container">
+                <div class="item-title"> {{ whisky }} </div>
+                <div class="item-brand"> {{ brand }} </div>
+                <div class="item-style">  {{ class }} </div>
+              </div>
+              <div class="review-info-container">
+                <div class="item-abv"> 
+                  {{ #beerAbv }} {{ beerAbv }} % ABV {{/beerAbv}}
+                  {{ ^beerAbv }} NA % ABV {{/beerAbv}}
+                </div>
+                <div class="item-review"> 
+                  {{ reviews }} <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="item-add-container">
+              <form class="item-add-btn" action="" method="post" >
+                <input class="item-add-btn" type="submit" value="Review">
+              </form>
+              <form class="item-add-btn" action="" method="post" >
+                <input class="item-add-btn" type="submit" value="Add to Cellar">
+              </form>
+
+              <div class="item-icons-add">
+                <form class="item-favorite" action="" method="post" >
+                  <button class="item-favorite-btn">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                </form>
+                <form class="item-wishlist" action="" method="post" >
+                  <button class="item-wishlist-btn">
+                    <i class="fas fa-gift"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        {{/searchResults.whisky}}
+        </div>
     </div>
   </div>
 </body>
