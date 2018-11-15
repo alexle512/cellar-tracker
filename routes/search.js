@@ -1,7 +1,8 @@
 const express = require("express")
 const {
   displaySearch,
-  querySearch
+  querySearch,
+  redirectSearch
 } = require("../controllers/searchController")
 const router = express.Router()
 
@@ -16,10 +17,7 @@ const router = express.Router()
 /**
  * Routes
  */
-router
-  .route("/")
-  .get(displaySearch)
-  .post(querySearch)
+router.route("/").get(redirectSearch)
 
 router
   .route("/:type")

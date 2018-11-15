@@ -12,6 +12,7 @@ body {
 }
 
 #search-container {
+  font-family: "Roboto", sans-serif;
   background: white;
   width: 40em;
   display: flex;
@@ -21,6 +22,7 @@ body {
 }
 
 #search-bar {
+  font-family: "Roboto", sans-serif;
   background: #f9f9f9;
   display: flex;
   flex-direction: column;
@@ -55,18 +57,18 @@ body {
   font-size: 120%;
   font-weight: 600;
   letter-spacing: 1px;
-  background: #ffcc00;
+  background: #ffc312;
   border: 1px solid #f9f9f9f9;
   border-radius: 5px;
   cursor: pointer;
 }
 
 #search-item-btn:hover {
-  background: #ffd633;
+  background: #ffd045;
 }
 
 #search-item-btn:active {
-  background: #ffd633;
+  background: #ffd045;
   -moz-box-shadow: inset 0 0 5px #afafaf;
   -webkit-box-shadow: inset 0 0 5px #afafaf;
   box-shadow: inset 0 0 5px #afafaf;

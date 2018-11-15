@@ -17,14 +17,19 @@ const whiskyDB = require("../models/whisky")(sequelize, Sequelize.DataTypes)
 
 let searchResults = { beers: [], wines: [], whisky: [] }
 
+const redirectSearch = async (req, res) => {
+  const type = req.params.type || "beer"
+  res.redirect(`search/beer`)
+}
+
 const displaySearch = async (req, res) => {
-  const type = req.params.type
+  const type = req.params.type || "beer"
   const noResults = {
     beer: searchResults.beers.length === 0,
     wine: searchResults.wines.length === 0,
     whisky: searchResults.whisky.length === 0
   }
-  res.render("search", { searchResults, type, noResults })
+  res.render(`search`, { searchResults, type, noResults })
 }
 
 const querySearch = async (req, res) => {
@@ -74,6 +79,7 @@ const fetchFromInit = () => {
 }
 
 module.exports = {
+  redirectSearch,
   displaySearch,
   querySearch
 }
