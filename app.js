@@ -6,12 +6,12 @@ const path = require("path")
 const bodyParser = require("body-parser")
 const mustacheExpress = require("mustache-express")
 const models = require("./models")
-
 const search = require("./routes/search")
 
 /**
  * Init
  */
+
 const app = express()
 app.engine("mustache", mustacheExpress())
 

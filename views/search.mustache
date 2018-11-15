@@ -4,22 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="/css/search.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <title>Search</title>
 </head>
 <body>
   <div id="search-root">
     <div id="search-container">
-    <form id="search-form" action="/search" method="post" >
-      <input id="search-item-textbox" type="textbox" name="itemName">
-      <input id="search-item-btn" type="submit" value="Find">
-    </form>
-    <div id="search-filters">
-      <input name="filter-beer" type="button" value="Beer">
-      <input name="filter-spirits" type="button" value="Spirits">
-      <input name="filter-wine" type="button" value="Wine">
-    </div>
+      <div id="search-bar">
+        <form id="search-form" action="/search" method="post" >
+          <input id="search-item-textbox" type="textbox" name="itemName">
+          <input id="search-item-btn" type="submit" value="Search">
+        </form>
+      </div>
+      <div id="search-filters">
+        <a class="filter-tab" data-filter="beer" href="/search/beer">Beer</a>
+        <a class="filter-tab" data-filter="wine" href="/search/wine">Wine</a>
+        <a class="filter-tab filter-tab-right" data-filter="whisky" href="/search/whisky">Whisky</a>
+      </div>
     <div id="search-results-container">
       {{#searchResults.beers}}
         <div class="search-result-container">
@@ -94,6 +96,9 @@
   </div>
 </body>
 <script>
-
+  console.log("Hello")
+  const path = window.location.pathname.split("/").pop()
+  const el = document.querySelector(`[data-filter='${path}'`)
+  el.classList.add("active")
 </script>
 </html>

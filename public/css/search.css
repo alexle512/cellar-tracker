@@ -2,47 +2,105 @@
 
 body {
   margin: 0;
+  background: #f5f2e8;
 }
 
 #search-root {
+  background: #f5f2e8;
   display: flex;
   justify-content: center;
   font-family: "Roboto", sans-serif;
 }
 
 #search-container {
+  background: white;
   width: 30em;
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 1em;
+}
+
+#search-bar {
+  background: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 #search-form {
   display: flex;
-  justify-content: center;
-  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 100%;
+  padding: 2rem;
+  height: 2.5em;
 }
 
 #search-item-textbox {
-  width: 80%;
+  width: 70%;
+  border: 1px solid #eeeeee;
+  border-radius: 2px;
+  font-size: 120%;
+}
+
+#search-item-btn {
+  color: white;
+  width: 25%;
+  font-size: 120%;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background: #ffcc00;
+  border: 1px solid #f9f9f9f9;
+  border-radius: 5px;
 }
 
 #search-filters {
+  border-top: 1px solid #e2e2e2;
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  padding: 0.5em 0 0.5em 0;
+}
+
+.filter-tab {
+  color: black;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 100%;
+  background-color: #f0f0f0;
+  text-align: center;
+  border-right: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
+  border-radius: 2px;
+  width: 33.4%;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.filter-tab-right {
+  border-right: none;
+}
+
+.active.filter-tab {
+  background: white;
+  border-bottom: none;
+}
+
+.filter-tab:hover {
+}
+
+.filter-tab:active {
+  background: white;
+  border-bottom: none;
 }
 
 #search-results-container {
+  background: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 0.5em;
   width: 80%;
-  border-top: 2px solid #eeeeee;
 }
 
 .search-result-container {

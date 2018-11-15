@@ -15,20 +15,7 @@ const beerDB = require("../models/beer")(sequelize, Sequelize.DataTypes)
 const wineDB = require("../models/wine")(sequelize, Sequelize.DataTypes)
 const whiskyDB = require("../models/whisky")(sequelize, Sequelize.DataTypes)
 
-let searchResults = { beers: [], wines: [], spirits: [] }
-
-let allWines = []
-let allBeers = []
-
-/**
- * Fetch From Database on Server Load
- */
-// const onLoad = async () => {
-//   allWines = await wineDB.findAll()
-//   allBeers = await beerDB.findAll()
-// }
-// onLoad()
-// End Fetch From db on server load
+let searchResults = { beers: [], wines: [], whisky: [] }
 
 const displaySearch = async (req, res) => {
   res.render("search", { searchResults })
@@ -39,11 +26,8 @@ const querySearch = async (req, res) => {
   const itemName = req.body.itemName
   const limit = 20
   let offset = 0
-  switch (type) {
-    case "wine":
-    case "beer":
-    case "spirits":
-    default:
+  if (type === "wine") {
+    console.log("wine")
   }
 
   /**
@@ -62,7 +46,7 @@ const querySearch = async (req, res) => {
     offset: offset
   })) || [(rows = [])]
   searchResults = { beers: beers.rows, wines: wines.rows }
-  res.redirect("/search")
+  res.redirect(`/search/${type}`)
 }
 
 const searchBeers = async (req, res) => {}
@@ -72,9 +56,6 @@ const searchWines = async (req, res) => {}
 const searchSpirits = async (req, res) => {}
 
 const fetchFromInit = () => {
-  /**
-   * Fetch From Database on Server Load
-   */
   const wines = allWines.filter(
     wine =>
       wine.title.toUpperCase().includes(itemName.toUpperCase()) ||
