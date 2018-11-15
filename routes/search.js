@@ -22,4 +22,9 @@ router
   .get(displaySearch)
   .post(querySearch)
 
+router
+  .route("/:type")
+  .get(displaySearch)
+  .post(querySearch)
+
 module.exports = router

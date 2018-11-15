@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
 body {
   margin: 0;
 }
@@ -5,6 +7,7 @@ body {
 #search-root {
   display: flex;
   justify-content: center;
+  font-family: "Roboto", sans-serif;
 }
 
 #search-container {
@@ -38,6 +41,8 @@ body {
   flex-direction: column;
   align-items: center;
   margin-top: 0.5em;
+  width: 80%;
+  border-top: 2px solid #eeeeee;
 }
 
 .search-result-container {
@@ -45,19 +50,89 @@ body {
   flex-direction: column;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-  padding: 0.2em;
-  border: 1px solid black;
-  border-radius: 5px;
+  border-bottom: 2px solid #eeeeee;
   width: 100%;
 }
 
+.search-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 0.6em;
+  padding-bottom: 0.8em;
+  width: 100%;
+}
+
+.item-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: center;
+  padding-right: 1em;
+  height: 4em;
+  width: 4em;
+}
+
+.item-title-container {
+  display: flex;
+  flex-direction: column;
+  padding-right: 0.8em;
+}
+
 .item-title {
-  align-self: center;
   text-align: left;
-  font-size: 1.2em;
+  font-size: 1em;
+}
+
+.item-brewery {
+  text-align: left;
+  font-size: 0.8em;
+  padding-top: 0.4em;
+}
+
+.item-style {
+  text-align: left;
+  font-size: 0.7em;
+  padding-top: 0.4em;
+}
+
+.review-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 30%;
+  margin-left: auto;
+  border-left: 2px solid #eeeeee;
+}
+
+.review-info-container-wine {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 30%;
+  margin-left: auto;
+}
+
+.item-abv {
+  border-bottom: 2px solid #eeeeee;
+  padding-bottom: 0.5em;
+}
+
+.item-review {
+  padding-top: 0.5em;
+}
+
+.item-review-wine {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .item-add-container {
   display: flex;
   justify-content: space-between;
+  padding-bottom: 0.8em;
 }
