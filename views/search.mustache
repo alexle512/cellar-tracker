@@ -10,9 +10,11 @@
 </head>
 <body>
   <div id="search-root">
+
     <div id="search-container">
+
       <div id="search-bar">
-        <form id="search-form" action="/search" method="post" >
+        <form id="search-form" action="/search/{{type}}" method="post" >
           <input id="search-item-textbox" type="textbox" name="itemName">
           <input id="search-item-btn" type="submit" value="Search">
         </form>
@@ -22,83 +24,137 @@
         <a class="filter-tab" data-filter="wine" href="/search/wine">Wine</a>
         <a class="filter-tab filter-tab-right" data-filter="whisky" href="/search/whisky">Whisky</a>
       </div>
-    <div id="search-results-container">
-      {{#searchResults.beers}}
-        <div class="search-result-container">
-          <div class="search-info-container">
-            <div class="item-image">
-              <i class="fas fa-beer fa-3x"></i>
-            </div>
 
-            <div class="item-title-container">
-              <div class="item-title"> {{ beerName }} </div>
-              <div class="item-brewery"> {{ breweryName }} </div>
-              <div class="item-style">  {{ beerStyle }} </div>
-            </div>
+      <div id="search-results-container">
+        <div id="search-results-stats" style="display: none;">Stats Go Here</div>
 
+        {{#noResults.beer}}
+        <div id="search-results-noresults" data-noresults="beer" style="display: none">Use the Search Box to search for a Beer.</div>
+        {{/noResults.beer}}
 
-            <div class="review-info-container">
-              <div class="item-abv"> 
-                {{ #beerAbv }} {{ beerAbv }} % ABV {{/beerAbv}}
-                {{ ^beerAbv }} NA % ABV {{/beerAbv}}
+        {{#noResults.wine}}
+        <div id="search-results-noresults" data-noresults="wine" style="display: none">Use the Search Box to search for a Wine.</div>
+        {{/noResults.wine}}
+
+        {{#noResults.whisky}}
+        <div id="search-results-noresults" data-noresults="whisky" style="display: none">Use the Search Box to search for a Whisky.</div>
+        {{/noResults.whisky}}
+
+        <div class="search-results" data-results="beer" style="display: none">
+
+        {{#searchResults.beers}}
+          <div class="search-result-container">
+
+            <div class="search-info-container">
+              <div class="item-image">
+                <i class="fas fa-beer fa-3x"></i>
               </div>
-              <div class="item-review"> 
-                {{ reviewAverage }} <i class="fas fa-star"></i>
+              <div class="item-title-container">
+                <div class="item-title"> {{ beerName }} </div>
+                <div class="item-brand"> {{ breweryName }} </div>
+                <div class="item-style">  {{ beerStyle }} </div>
+              </div>
+              <div class="review-info-container">
+                <div class="item-abv"> 
+                  {{ #beerAbv }} {{ beerAbv }} % ABV {{/beerAbv}}
+                  {{ ^beerAbv }} NA % ABV {{/beerAbv}}
+                </div>
+                <div class="item-review"> 
+                  {{ reviewAverage }} <i class="fas fa-star"></i>
+                </div>
               </div>
             </div>
-          </div>
 
+            <div class="item-add-container">
+              <form class="item-add-btn" action="" method="post" >
+                <input class="item-add-btn" type="submit" value="Review">
+              </form>
+              <form class="item-add-btn" action="" method="post" >
+                <input class="item-add-btn" type="submit" value="Add to Cellar">
+              </form>
 
-          <div class="item-add-container">
-            <form id="item-add-review" action="" method="post" >
-              <input class="item-add-btn" type="submit" value="Review">
-            </form>
-            <form id="item-add-cellar" action="" method="post" >
-              <input class="item-add-btn" type="submit" value="Add to Cellar">
-            </form>
+              <div class="item-icons-add">
+                <form class="item-favorite" action="" method="post" >
+                  <button class="item-favorite-btn">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                </form>
+                <form class="item-wishlist" action="" method="post" >
+                  <button class="item-wishlist-btn">
+                    <i class="fas fa-gift"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+
           </div>
+        {{/searchResults.beers}}
         </div>
-      {{/searchResults.beers}}
-      {{#searchResults.wines}}
-        <div class="search-result-container">
-          <div class="search-info-container">
-            <div class="item-image">
-              <i class="fas fa-wine-glass-alt fa-3x"></i>
-            </div>
 
-            <div class="item-title-container">
-              <div class="item-title"> {{ title }} </div>
-              <div class="item-brewery"> {{ winery }} </div>
-              <div class="item-style">  {{ variety }} </div>
-            </div>
+        <div class="search-results" data-results="wine" style="display: none;">
+        {{#searchResults.wines}}
+          <div class="search-result-container">
+            <div class="search-info-container">
+              <div class="item-image">
+                <i class="fas fa-wine-glass-alt fa-3x"></i>
+              </div>
 
-
-            <div class="review-info-container-wine">
-              <div class="item-review-wine"> 
-                {{ points }} <i class="fas fa-star"></i>
+              <div class="item-title-container">
+                <div class="item-title"> {{ title }} </div>
+                <div class="item-brand"> {{ winery }} </div>
+                <div class="item-style">  {{ variety }} </div>
+              </div>
+              <div class="review-info-container-wine">
+                <div class="item-review-wine"> 
+                  {{ points }} <i class="fas fa-star"></i>
+                </div>
               </div>
             </div>
-          </div>
 
+            <div class="item-add-container">
+              <form class="item-add-btn" action="" method="post" >
+                <input class="item-add-btn" type="submit" value="Review">
+              </form>
+              <form class="item-add-btn" action="" method="post" >
+                <input class="item-add-btn" type="submit" value="Add to Cellar">
+              </form>
 
-          <div class="item-add-container">
-            <form id="item-add-review" action="" method="post" >
-              <input class="item-add-btn" type="submit" value="Review">
-            </form>
-            <form id="item-add-cellar" action="" method="post" >
-              <input class="item-add-btn" type="submit" value="Add to Cellar">
-            </form>
+              <div class="item-icons-add">
+                <form class="item-favorite" action="" method="post" >
+                  <button class="item-favorite-btn">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                </form>
+                <form class="item-wishlist" action="" method="post" >
+                  <button class="item-wishlist-btn">
+                    <i class="fas fa-gift"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+
           </div>
+        {{/searchResults.wines}}
         </div>
-      {{/searchResults.wines}}
-    </div>
     </div>
   </div>
 </body>
 <script>
-  console.log("Hello")
+
   const path = window.location.pathname.split("/").pop()
-  const el = document.querySelector(`[data-filter='${path}'`)
-  el.classList.add("active")
+  const filterEl = document.querySelector(`[data-filter='${path}'`)
+  filterEl.classList.add("active")
+
+
+  try {
+    const noResultsEl = document.querySelector(`[data-noresults='${path}'`)
+    noResultsEl.style.display= "block"
+  } catch(err) {}
+
+  try {
+  const resultsEl = document.querySelector(`[data-results='${path}'`)
+  resultsEl.style.display= "block"
+  } catch(err) {}
+
 </script>
 </html>
