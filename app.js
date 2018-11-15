@@ -5,17 +5,17 @@ const express = require("express")
 const path = require("path")
 const bodyParser = require("body-parser")
 const mustacheExpress = require("mustache-express")
-const models = require("./models")
 const search = require("./routes/search")
+const session = require("express-session")
 
+const models = require("./models")
 /**
  * Init
  */
-
 const app = express()
-app.engine("mustache", mustacheExpress())
 
 // View Engine
+app.engine("mustache", mustacheExpress())
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "mustache")
 
@@ -26,6 +26,15 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // Public Files
 app.use(express.static(path.join(__dirname, "public")))
 
+// Sessions
+app.use(
+  session({
+    secret: "rigby",
+    resave: false,
+    saveUninitialized: true
+  })
+)
+
 /**
  * Custon Middleware
  */
@@ -34,6 +43,85 @@ app.use(express.static(path.join(__dirname, "public")))
  * Route Config
  */
 
+// Login
+app.get("/login", function(req, res) {
+  res.render("login")
+})
+
+app.post("/login", function(req, res) {
+  let username = req.body.username
+  let password = req.body.password
+
+  models.users_database
+    .findOne({
+      where: {
+        username: username,
+        password: password
+      }
+    })
+    .then(function(user) {
+      if (!user) {
+        res.render("login", { message: "Invalid username/password..." })
+      } else {
+        if (req.session) {
+          req.session.userid = user.id
+          req.session.username = user.username
+        }
+
+        res.redirect("/myCellar")
+      }
+    })
+})
+
+app.post("/register", function(req, res) {
+  let firstName = req.body.firstName
+  let lastName = req.body.lastName
+  let username = req.body.username
+  let email = req.body.email
+  let password = req.body.password
+
+  // find if the username has already been registered
+  models.users_database
+    .findOne({
+      where: {
+        username: username
+      }
+    })
+    .then(function(user) {
+      // this user with username already exists
+      if (user) {
+        // this means that user exists
+        res.render("register", { message: "Username is already registered..." })
+      } else {
+        // if username does not exist already in database
+        // save user in the database
+
+        let userToSave = models.users_database.build({
+          username: username,
+          password: password,
+          email: email,
+          first_name: firstName,
+          last_name: lastName
+        })
+
+        userToSave.save().then(function(newUser) {
+          res.redirect("/login")
+        })
+      }
+    })
+})
+
+app.get("/myCellar", function(req, res) {
+  res.render("myCellar")
+})
+
+app.get("/register", function(req, res) {
+  res.render("register")
+})
+
+app.get("/", function(req, res) {
+  res.render("login")
+})
 // SEARCH
 app.use("/search", search)
 
