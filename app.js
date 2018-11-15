@@ -39,13 +39,13 @@ app.use("/search", search)
 
 // CELLAR
 
-let cellar = models.wishlist.build({
-  beverage: "Stolichnaya Elit",
-  price: 25.0,
-  notes: "Graduation Party"
-})
-//   cellar.save().then(function(){
+// let cellar = models.wishlist.build({
+//   beverage: "Stolichnaya Elit",
+//   price: 25.0,
+//   notes: "Graduation Party"
 // })
+// //   cellar.save().then(function(){
+// // })
 app.get('/wishlist', function(req,res){
   models.wishlist.findAll().then(function(wishlists){
     res.render('wishlist', {wishlists: wishlists})
@@ -75,7 +75,7 @@ app.post("/delete-wishlist", function(req, res) {
     })
 
   })
-})
+
 
  app.post('/update-wishlist', function(req, res) {
 
@@ -106,10 +106,15 @@ app.get('/update-wishlist/:id', function(req, res) {
   let id = req.params.id
 
   models.wishlist.findById(id).then(function(wishlist){
-    res.render('update-wishlist',{id: wishlist.id,beverage: wishlist.beverage, price: wishlist.price, notes: wishlist.notes})
+    res.render('update-wishlist',
+    { id: wishlist.id,
+    beverage: wishlist.beverage,
+    price: wishlist.price,
+    notes: wishlist.notes
+    })
   })
-
-
 })
+
+
 
 module.exports = app
