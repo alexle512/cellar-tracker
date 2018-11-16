@@ -11,11 +11,24 @@ const sequelize = new Sequelize(
     dialect: "postgres"
   }
 )
+
 const beerDB = require("../models/beer")(sequelize, Sequelize.DataTypes)
 const wineDB = require("../models/wine")(sequelize, Sequelize.DataTypes)
 const whiskyDB = require("../models/whisky")(sequelize, Sequelize.DataTypes)
 
 let searchResults = { beers: [], wines: [], whisky: [] }
+
+const checkForUser = async (req, res, next) => {
+  try {
+    if (req.session.username) {
+      next()
+    } else {
+      res.redirect("/login")
+    }
+  } catch (err) {
+    res.redirect("/login")
+  }
+}
 
 const redirectSearch = async (req, res) => {
   const type = req.params.type || "beer"
@@ -90,6 +103,7 @@ const fetchFromInit = () => {
 }
 
 module.exports = {
+  checkForUser,
   redirectSearch,
   displaySearch,
   querySearch

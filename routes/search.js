@@ -1,5 +1,6 @@
 const express = require("express")
 const {
+  checkForUser,
   displaySearch,
   querySearch,
   redirectSearch
@@ -13,6 +14,8 @@ const router = express.Router()
 /**
  * Middleweare
  */
+
+router.use(checkForUser)
 
 /**
  * Routes
