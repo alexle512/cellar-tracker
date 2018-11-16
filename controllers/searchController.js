@@ -2,6 +2,7 @@ const Sequelize = require("sequelize")
 const config = require(__dirname + "/../config/config")
 const { productData } = config
 
+console.log(productData)
 const sequelize = new Sequelize(
   productData.database,
   productData.username,
@@ -11,7 +12,6 @@ const sequelize = new Sequelize(
     dialect: "postgres"
   }
 )
-console.log(productData)
 
 const beerDB = require("../models/beer")(sequelize, Sequelize.DataTypes)
 const wineDB = require("../models/wine")(sequelize, Sequelize.DataTypes)
