@@ -3,33 +3,75 @@
   <head>
     <meta charset="utf-8">
     <title>Update Wishlist</title>
+    <link rel="stylesheet" href="/css/search.css">
+    <link rel="stylesheet" href="/css/navigation.css">
     <link rel="stylesheet" type="text/css" href="css/cellar.css">
   </head>
   <body>
 
-    <div class="cellar_navbar">
-      <a href="/favorites"><h3> My Favorites </h3></a>
-      <a href="/cellar"><h3> My Cellar </h3></a>
-      <a href="/wishlist"><h3> My Wishlist </h3></a>
-      <a href="#"><h3> Sign Out </h3></a>
+    <div id="nav">
+      <div id="nav-main">
+        <div id="nav-burger" onclick="toggleBurger(this)">
+          <div id="burger-top"></div>
+          <div id="burger-mid"></div>
+          <div id="burger-bot"></div>
+        </div>
+        <div id="nav-title">
+          <a href="/myCellar">
+          <div class="nav-logo">C</div>ellar
+          </a>
+        </div>
+        <div id="nav-links">
+          <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
+          <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
+          <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
+        </div>
+        <div id="nav-search">
+          <form id="nav-search-form" action="/search/beer" method="post" >
+            <input id="nav-search-item-textbox" type="textbox" name="itemName">
+          </form>
+        </div>
+      </div>
+      <div id="nav-links-dropdown">
+        <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
+        <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
+        <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
+      </div>
     </div>
 
     <h3 id="update_title"> Enter Information Below </h3>
 
-    <form action="/update-cellar" method="POST">
-      <input type="hidden" name="cellarId" value="{{id}}" />
-        <h3>{{title}}</h3>
-        <h3>{{category}}</h3>
-        <h3>{{review}}</h3>
-    </br>
-      <input type="number" name="price" value="{{price}}" placeholder="Enter Price Here....." />
-    </br>
-      <input type="text" name="notes" value="{{notes}}" placeholder="Enter Special Notes Here...." />
-    </br>
-      <input type="submit" value="Update" />
-    </br>
-    </form>
-
+    <div class="search-result-container">
+      <div class="search-info-container">
+        <div class="item-image">
+          <i class="fas fa-beer fa-3x"></i>
+        </div>
+        <div class="item-title-container">
+          <div class="item-title"> {{ title }} </div>
+          <div class="item-category"> {{ category }} </div>
+          <div class="item-creator">  {{ creator }} </div>
+          <div class="item-review">  {{ review }} </div>
+        </div>
+      <div class="cellar_buttons">
+        <form action="/update-cellar" method="POST">
+          <input type="hidden" name="cellarId" value="{{id}}" />
+        </br>
+          <input type="number" name="price" value="{{price}}" placeholder="Enter Price Here....." />
+        </br>
+          <input type="text" name="notes" value="{{notes}}" placeholder="Enter Special Notes Here...." />
+        </br>
+          <input type="submit" value="Update" />
+        </br>
+        </form>
+        </div>
+      </div>
+    </div>
   </body>
-
+      <script>
+      const toggleBurger = function(el) {
+        el.classList.toggle("change")
+        const navLinksEl = document.getElementById("nav-links-dropdown")
+        navLinksEl.classList.toggle("open")
+      }
+    </script>
 </html>

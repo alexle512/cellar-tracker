@@ -128,40 +128,28 @@ app.use("/search", search)
 
 // CELLAR
 
-// let cellar = models.favorite.build({
-//
-//   title: "Steampunk Octopus Spirit",
-//   price: 78.98,
-//   notes: "Christmas",
-//   user_id: 2
-//
-// })
-
-// cellar.save().then(function() {
-//
-//   })
-
-// if(!$('input').val()){
-//     $('#button').hide();
-// }
-// else {
-//     $('#button').show();
-// }
 app.get("/wishlist", function(req, res) {
-  models.wishlist.findAll().then(function(wishlists) {
-    res.render("wishlist", { wishlists: wishlists })
+  models.wishlist.findAll({where: {user_id: req.session.userid}
+  }).then(function(wishlists) {
+    res.render("wishlist", { wishlists: wishlists, username: req.session.username })
   })
 })
 
 app.get("/cellar", function(req, res) {
-  models.cellar.findAll().then(function(cellers) {
-    res.render("cellar", { lists: cellers })
+
+  models.cellar.findAll({
+    where: {user_id: req.session.userid}
+  }).then(function(cellers) {
+  res.render("cellar", { cellers: cellers, username: req.session.username })
+
   })
 })
 
 app.get("/favorites", function(req, res) {
-  models.favorite.findAll().then(function(favorites) {
-    res.render("favorites", { favorites: favorites })
+
+  models.favorite.findAll({where: {user_id: req.session.userid}
+  }).then(function(favorites) {
+    res.render("favorites", { favorites: favorites, username: req.session.username })
   })
 })
 
@@ -177,7 +165,7 @@ app.post("/cellar", function(req, res) {
     review: review,
     category: category
   })
-  beer.save().then(function() {
+  cellar.save().then(function() {
     res.render("cellar", { cellar: cellar })
   })
 })

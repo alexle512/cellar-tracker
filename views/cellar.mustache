@@ -3,36 +3,77 @@
   <head>
     <meta charset="utf-8">
     <title> My Cellar</title>
+    <link rel="stylesheet" href="/css/navigation.css">
+    <link rel="stylesheet" href="/css/search.css">
     <link rel="stylesheet" type="text/css" href="css/cellar.css">
   </head>
   <body>
 
-  <h1 class="page_heading"> Welcome to my Cellar </h1>
+  <h1 class="page_heading"> Welcome to {{username}} Cellar </h1>
 
-  <div class="cellar_navbar">
-    <a href="/favorites"><h3> My Favorites </h3></a>
-    <a href="/wishlist"><h3> My Wishlist </h3></a>
-    <a href="#"><h3> Sign Out </h3></a>
+  <div id="nav">
+    <div id="nav-main">
+      <div id="nav-burger" onclick="toggleBurger(this)">
+        <div id="burger-top"></div>
+        <div id="burger-mid"></div>
+        <div id="burger-bot"></div>
+      </div>
+      <div id="nav-title">
+        <a href="/myCellar">
+        <div class="nav-logo">C</div>ellar
+        </a>
+      </div>
+      <div id="nav-links">
+        <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
+        <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
+        <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
+      </div>
+      <div id="nav-search">
+        <form id="nav-search-form" action="/search/beer" method="post" >
+          <input id="nav-search-item-textbox" type="textbox" name="itemName">
+        </form>
+      </div>
+    </div>
+    <div id="nav-links-dropdown">
+      <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
+      <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
+      <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
+    </div>
   </div>
-      <!-- {{username}}'s cellar, need info about user -->
-  <ul class="list_container">
-    {{#cellar}}
-    <div class="info">
-      <li><strong>{{title}}</strong></li>
-      <li>{{category}} </li>
-      <li>{{creator}}</li>
-      <li>{{review}}</li>
-    <h6>***To add price and notes click Update ***</h6>
+
+
+  {{#cellers}}
+    <div class="search-result-container">
+      <div class="search-info-container">
+        <div class="item-image">
+          <i class="fas fa-beer fa-3x"></i>
+        </div>
+        <div class="item-title-container">
+          <div class="item-title"> {{ title }} </div>
+          <div class="item-category"> {{ category }} </div>
+          <div class="item-creator">  {{ creator }} </div>
+          <div class="item-review">  {{ review }} </div>
+        <h6>***To add price and notes click Update ***</h6>
+        </div>
+      </div>
       <div class="cellar_buttons">
-    <form action="/delete-cellar" method="POST">
-        <input type="hidden" name="cellarId"
-        value="{{id}}" />
-        <input type="submit" value="Remove" />
-      </form>
+        <form action="/delete-cellar" method="POST">
+          <input type="hidden" name="cellarId"
+          value="{{id}}" />
+          <input type="submit" value="Remove" />
+        </form>
         <a class="update_button" href="/update-cellar/{{id}}"> Update </a>
-     </div>
-   </div>
-      {{/cellar}}
-    </ul>
-  </body>
+      </div>
+    </div>
+  {{/cellers}}
+</body>
+
+  <script>
+    const toggleBurger = function(el) {
+      el.classList.toggle("change")
+      const navLinksEl = document.getElementById("nav-links-dropdown")
+      navLinksEl.classList.toggle("open")
+
+    }
+  </script>
 </html>

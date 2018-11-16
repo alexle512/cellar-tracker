@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/navigation.css">
     <link rel="stylesheet" type="text/css" href="css/cellar.css">
     <title>My Favorites</title>
   </head>
@@ -9,31 +10,69 @@
 
     <h1 class="page_heading"> My Wish List </h1>
 
-    <div class="cellar_navbar">
-      <a href="/favorites"><h3> My Favorites </h3></a>
-      <a href="/cellar"><h3> My Cellar </h3></a>
-      <a href="/wishlist"><h3> My Wishlist </h3></a>
-      <a href="#"><h3> Sign Out </h3></a>
-    </div>
+    <!-- Nav Bar -->
+        <div id="nav">
+          <div id="nav-main">
+            <div id="nav-burger" onclick="toggleBurger(this)">
+              <div id="burger-top"></div>
+              <div id="burger-mid"></div>
+              <div id="burger-bot"></div>
+            </div>
+            <div id="nav-title">
+              <a href="/myCellar">
+              <div class="nav-logo">C</div>ellar
+              </a>
+            </div>
+            <div id="nav-links">
+              <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
+              <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
+              <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
+            </div>
+            <div id="nav-search">
+              <form id="nav-search-form" action="/search/beer" method="post" >
+                <input id="nav-search-item-textbox" type="textbox" name="itemName">
+              </form>
+            </div>
+          </div>
+          <div id="nav-links-dropdown">
+            <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
+            <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
+            <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
+          </div>
+        </div>
+    <!-- End Nav Bar -->
 
-    <ul class="list_container">
-      {{#wishlists}}
-      <div class="info">
-        <li><strong>{{title}}</strong></li>
-        <li>{{category}} </li>
-        <li>{{creator}}</li>
-        <li>{{review}}</li>
-      <h6>***To add price and notes click Update ***</h6>
-        <div class="cellar_button">
-      <form action="/delete-wishlist" method="POST">
-        <input type="hidden" name="wishlistId"
-        value="{{id}}" />
-        <input type="submit" value="Remove" />
-      </form>
-        <a href="/update-wishlist/{{id}}"> Update </a>
+    {{#wishlists}}
+      <div class="search-result-container">
+        <div class="search-info-container">
+          <div class="item-image">
+            <i class="fas fa-beer fa-3x"></i>
+          </div>
+          <div class="item-title-container">
+            <div class="item-title"> {{ title }} </div>
+            <div class="item-category"> {{ category }} </div>
+            <div class="item-creator">  {{ creator }} </div>
+            <div class="item-review">  {{ review }} </div>
+          <h6>***To add price and notes click Update ***</h6>
+          </div>
+        </div>
+        <div class="cellar_buttons">
+          <form action="/delete-wishlist" method="POST">
+            <input type="hidden" name="wishlistId"
+            value="{{id}}" />
+            <input type="submit" value="Remove" />
+          </form>
+          <a class="update_button" href="/update-wishlist/{{id}}"> Update </a>
         </div>
       </div>
-      {{/wishlists}}
-    </ul>
+    {{/wishlits}}
   </body>
+
+  <script>
+      const toggleBurger = function(el) {
+        el.classList.toggle("change")
+        const navLinksEl = document.getElementById("nav-links-dropdown")
+        navLinksEl.classList.toggle("open")
+      }
+  </script>
 </html>
