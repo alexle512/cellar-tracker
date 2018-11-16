@@ -4,96 +4,252 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/search.css">
+  <!-- Searc -->
+  <link rel="stylesheet" href="/css/search.css">
+
+  <!-- Nav Bar -->
+  <link rel="stylesheet" href="/css/navigation.css">
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <title>Search</title>
 </head>
 <body>
+
+<!-- Nav Bar -->
+    <div id="nav">
+      <div id="nav-main">
+        <div id="nav-burger" onclick="toggleBurger(this)">
+          <div id="burger-top"></div>
+          <div id="burger-mid"></div>
+          <div id="burger-bot"></div>
+        </div>
+        <div id="nav-title">
+          <a href="/myCellar">
+          <div class="nav-logo">C</div>ellar
+          </a>
+        </div>
+        <div id="nav-links">
+          <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
+          <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
+          <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
+        </div>
+        <div id="nav-search">
+          <form id="nav-search-form" action="/search/beer" method="post" >
+            <input id="nav-search-item-textbox" type="textbox" name="itemName">
+          </form>
+        </div>
+      </div>
+      <div id="nav-links-dropdown">
+        <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
+        <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
+        <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
+      </div>
+    </div>
+<!-- End Nav Bar -->
+
   <div id="search-root">
     <div id="search-container">
-    <form id="search-form" action="/search" method="post" >
-      <input id="search-item-textbox" type="textbox" name="itemName">
-      <input id="search-item-btn" type="submit" value="Find">
-    </form>
-    <div id="search-filters">
-      <input name="filter-beer" type="button" value="Beer">
-      <input name="filter-spirits" type="button" value="Spirits">
-      <input name="filter-wine" type="button" value="Wine">
-    </div>
-    <div id="search-results-container">
-      {{#searchResults.beers}}
-        <div class="search-result-container">
-          <div class="search-info-container">
-            <div class="item-image">
-              <i class="fas fa-beer fa-3x"></i>
-            </div>
+      <div id="search-bar">
+        <form id="search-form" action="/search/{{type}}" method="post" >
+          <input id="search-item-textbox" type="textbox" name="itemName">
+          <input id="search-item-btn" type="submit" value="Search">
+        </form>
+      </div>
+      <div id="search-filters">
+        <a class="filter-tab" data-filter="beer" href="/search/beer">Beer</a>
+        <a class="filter-tab" data-filter="wine" href="/search/wine">Wine</a>
+        <a class="filter-tab filter-tab-right" data-filter="whisky" href="/search/whisky">Whisky</a>
+      </div>
 
-            <div class="item-title-container">
-              <div class="item-title"> {{ beerName }} </div>
-              <div class="item-brewery"> {{ breweryName }} </div>
-              <div class="item-style">  {{ beerStyle }} </div>
-            </div>
+      <div id="search-results-container">
+        <div id="search-results-stats" style="display: none;">Stats Go Here</div>
 
+        {{#noResults.beer}}
+        <div id="search-results-noresults" data-noresults="beer" style="display: none">Use the Search Box to search for a Beer.</div>
+        {{/noResults.beer}}
 
-            <div class="review-info-container">
-              <div class="item-abv"> 
-                {{ #beerAbv }} {{ beerAbv }} % ABV {{/beerAbv}}
-                {{ ^beerAbv }} NA % ABV {{/beerAbv}}
+        {{#noResults.wine}}
+        <div id="search-results-noresults" data-noresults="wine" style="display: none">Use the Search Box to search for a Wine.</div>
+        {{/noResults.wine}}
+
+        {{#noResults.whisky}}
+        <div id="search-results-noresults" data-noresults="whisky" style="display: none">Use the Search Box to search for a Whisky.</div>
+        {{/noResults.whisky}}
+
+        <div class="search-results" data-results="beer" style="display: none">
+
+        {{#searchResults.beers}}
+          <div class="search-result-container">
+
+            <div class="search-info-container">
+              <div class="item-image">
+                <i class="fas fa-beer fa-3x"></i>
               </div>
-              <div class="item-review"> 
-                {{ reviewAverage }} <i class="fas fa-star"></i>
+              <div class="item-title-container">
+                <div class="item-title"> {{ beerName }} </div>
+                <div class="item-brand"> {{ breweryName }} </div>
+                <div class="item-style">  {{ beerStyle }} </div>
+              </div>
+              <div class="review-info-container">
+                <div class="item-abv"> 
+                  {{ #beerAbv }} {{ beerAbv }} % ABV {{/beerAbv}}
+                  {{ ^beerAbv }} NA % ABV {{/beerAbv}}
+                </div>
+                <div class="item-review"> 
+                  {{ reviewAverage }} <i class="fas fa-star"></i>
+                </div>
               </div>
             </div>
-          </div>
 
+            <div class="item-add-container">
+              <form class="item-add-btn" action="" method="post" >
+                <input class="item-add-btn" type="submit" value="Review">
+              </form>
+              <form class="item-add-btn" action="" method="post" >
+                <input class="item-add-btn" type="submit" value="Add to Cellar">
+              </form>
 
-          <div class="item-add-container">
-            <form id="item-add-review" action="" method="post" >
-              <input class="item-add-btn" type="submit" value="Review">
-            </form>
-            <form id="item-add-cellar" action="" method="post" >
-              <input class="item-add-btn" type="submit" value="Add to Cellar">
-            </form>
+              <div class="item-icons-add">
+                <form class="item-favorite" action="" method="post" >
+                  <button class="item-favorite-btn">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                </form>
+                <form class="item-wishlist" action="" method="post" >
+                  <button class="item-wishlist-btn">
+                    <i class="fas fa-gift"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+
           </div>
+        {{/searchResults.beers}}
         </div>
-      {{/searchResults.beers}}
-      {{#searchResults.wines}}
-        <div class="search-result-container">
-          <div class="search-info-container">
-            <div class="item-image">
-              <i class="fas fa-wine-glass-alt fa-3x"></i>
-            </div>
 
-            <div class="item-title-container">
-              <div class="item-title"> {{ title }} </div>
-              <div class="item-brewery"> {{ winery }} </div>
-              <div class="item-style">  {{ variety }} </div>
-            </div>
+        <div class="search-results" data-results="wine" style="display: none;">
+        {{#searchResults.wines}}
+          <div class="search-result-container">
+            <div class="search-info-container">
+              <div class="item-image">
+                <i class="fas fa-wine-glass-alt fa-3x"></i>
+              </div>
 
-
-            <div class="review-info-container-wine">
-              <div class="item-review-wine"> 
-                {{ points }} <i class="fas fa-star"></i>
+              <div class="item-title-container">
+                <div class="item-title"> {{ title }} </div>
+                <div class="item-brand"> {{ winery }} </div>
+                <div class="item-style">  {{ variety }} </div>
+              </div>
+              <div class="review-info-container-wine">
+                <div class="item-review-wine"> 
+                  {{ points }} <i class="fas fa-star"></i>
+                </div>
               </div>
             </div>
-          </div>
 
+            <div class="item-add-container">
+              <form class="item-add-btn" action="" method="post" >
+                <input class="item-add-btn" type="submit" value="Review">
+              </form>
+              <form class="item-add-btn" action="" method="post" >
+                <input class="item-add-btn" type="submit" value="Add to Cellar">
+              </form>
 
-          <div class="item-add-container">
-            <form id="item-add-review" action="" method="post" >
-              <input class="item-add-btn" type="submit" value="Review">
-            </form>
-            <form id="item-add-cellar" action="" method="post" >
-              <input class="item-add-btn" type="submit" value="Add to Cellar">
-            </form>
+              <div class="item-icons-add">
+                <form class="item-favorite" action="" method="post" >
+                  <button class="item-favorite-btn">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                </form>
+                <form class="item-wishlist" action="" method="post" >
+                  <button class="item-wishlist-btn">
+                    <i class="fas fa-gift"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+
           </div>
+        {{/searchResults.wines}}
         </div>
-      {{/searchResults.wines}}
-    </div>
+
+        <div class="search-results" data-results="whisky" style="display: none;">
+        {{#searchResults.whisky}}
+          <div class="search-result-container">
+
+            <div class="search-info-container">
+              <div class="item-image">
+                <i class="fas fa-glass-martini fa-3x"></i>
+              </div>
+              <div class="item-title-container">
+                <div class="item-title"> {{ whisky }} </div>
+                <div class="item-brand"> {{ brand }} </div>
+                <div class="item-style">  {{ class }} </div>
+              </div>
+              <div class="review-info-container">
+                <div class="item-abv"> 
+                  {{ #beerAbv }} {{ beerAbv }} % ABV {{/beerAbv}}
+                  {{ ^beerAbv }} NA % ABV {{/beerAbv}}
+                </div>
+                <div class="item-review"> 
+                  {{ reviews }} <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="item-add-container">
+              <form class="item-add-btn" action="" method="post" >
+                <input class="item-add-btn" type="submit" value="Review">
+              </form>
+              <form class="item-add-btn" action="" method="post" >
+                <input class="item-add-btn" type="submit" value="Add to Cellar">
+              </form>
+
+              <div class="item-icons-add">
+                <form class="item-favorite" action="" method="post" >
+                  <button class="item-favorite-btn">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                </form>
+                <form class="item-wishlist" action="" method="post" >
+                  <button class="item-wishlist-btn">
+                    <i class="fas fa-gift"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        {{/searchResults.whisky}}
+        </div>
     </div>
   </div>
 </body>
 <script>
+
+  const path = window.location.pathname.split("/").pop()
+  const filterEl = document.querySelector(`[data-filter='${path}'`)
+  filterEl.classList.add("active")
+
+
+  try {
+    const noResultsEl = document.querySelector(`[data-noresults='${path}'`)
+    noResultsEl.style.display= "block"
+  } catch(err) {}
+
+  try {
+    const resultsEl = document.querySelector(`[data-results='${path}'`)
+    resultsEl.style.display= "block"
+  } catch(err) {}
+
+
+  // Navigation
+
+  const toggleBurger = function(el) {
+    el.classList.toggle("change")
+    const navLinksEl = document.getElementById("nav-links-dropdown")
+    navLinksEl.classList.toggle("open")
+  }
 
 </script>
 </html>

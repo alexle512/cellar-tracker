@@ -15,66 +15,68 @@ const beerDB = require("../models/beer")(sequelize, Sequelize.DataTypes)
 const wineDB = require("../models/wine")(sequelize, Sequelize.DataTypes)
 const whiskyDB = require("../models/whisky")(sequelize, Sequelize.DataTypes)
 
-let searchResults = { beers: [], wines: [], spirits: [] }
+let searchResults = { beers: [], wines: [], whisky: [] }
 
-let allWines = []
-let allBeers = []
-
-/**
- * Fetch From Database on Server Load
- */
-// const onLoad = async () => {
-//   allWines = await wineDB.findAll()
-//   allBeers = await beerDB.findAll()
-// }
-// onLoad()
-// End Fetch From db on server load
+const redirectSearch = async (req, res) => {
+  const type = req.params.type || "beer"
+  res.redirect(`search/beer`)
+}
 
 const displaySearch = async (req, res) => {
-  res.render("search", { searchResults })
+  const type = req.params.type || "beer"
+  const noResults = {
+    beer: searchResults.beers.length === 0,
+    wine: searchResults.wines.length === 0,
+    whisky: searchResults.whisky.length === 0
+  }
+  res.render(`search`, { searchResults, type, noResults })
 }
 
 const querySearch = async (req, res) => {
   const type = req.params.type
   const itemName = req.body.itemName
+  searchResults = { beers: [], wines: [], whisky: [] }
   const limit = 20
   let offset = 0
-  switch (type) {
-    case "wine":
-    case "beer":
-    case "spirits":
-    default:
-  }
 
-  /**
-   * Fetch From Database / Search
-   */
-  const beers = (await beerDB.findAndCountAll({
+  // Fetch From Database / Search
+  if (itemName.trim() !== "") {
+    const beers = await searchBeers(itemName, limit, offset)
+    const wines = await searchWines(itemName, limit, offset)
+    const whisky = await searchWhisky(itemName, limit, offset)
+    searchResults = {
+      beers: beers.rows,
+      wines: wines.rows,
+      whisky: whisky.rows
+    }
+  }
+  res.redirect(`/search/${type}`)
+}
+
+const searchBeers = async (query, limit, offset) =>
+  (await beerDB.findAndCountAll({
     where: {
-      beer_name: { $ilike: `%${itemName}%` }
+      beer_name: { $ilike: `%${query}%` }
     },
     limit: limit,
     offset: offset
   })) || [(rows = [])]
-  const wines = (await wineDB.findAndCountAll({
-    where: { title: { $ilike: `%${itemName}%` } },
+
+const searchWines = async (query, limit, offset) =>
+  (await wineDB.findAndCountAll({
+    where: { title: { $ilike: `%${query}%` } },
     limit: limit,
     offset: offset
   })) || [(rows = [])]
-  searchResults = { beers: beers.rows, wines: wines.rows }
-  res.redirect("/search")
-}
 
-const searchBeers = async (req, res) => {}
-
-const searchWines = async (req, res) => {}
-
-const searchSpirits = async (req, res) => {}
+const searchWhisky = async (query, limit, offset) =>
+  (await whiskyDB.findAndCountAll({
+    where: { whisky: { $ilike: `%${query}%` } },
+    limit: limit,
+    offset: offset
+  })) || [(rows = [])]
 
 const fetchFromInit = () => {
-  /**
-   * Fetch From Database on Server Load
-   */
   const wines = allWines.filter(
     wine =>
       wine.title.toUpperCase().includes(itemName.toUpperCase()) ||
@@ -88,6 +90,7 @@ const fetchFromInit = () => {
 }
 
 module.exports = {
+  redirectSearch,
   displaySearch,
   querySearch
 }
