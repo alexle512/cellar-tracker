@@ -1,14 +1,11 @@
-/* body {
-  background: url('https://images.unsplash.com/photo-1530923629990-438735a7aa50?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b7b3785171950f8d36fe1ed3d9ab5d98&auto=format&fit=crop&w=650&q=80') no-repeat center fixed;
-  background-position: relative;
-  background-size: 50%;
-  width: 100%;
-  height: auto; */
+
+@import url("https://fonts.googleapis.com/css?family=Roboto");
 
 body {
   background: url('cellar 1.jpg') no-repeat center fixed;
   background-position: 0 0;
   background-size: 100% 100%;;
+  font-family: "Roboto", sans-serif;
 }
 
 
@@ -26,9 +23,11 @@ body {
   position: relative;
   padding-top: 10%;
   color: white;
+  font-family: "Roboto", sans-serif;
 }
 #button{
   margin-top: 5%;
+  font-family: "Roboto", sans-serif;
 }
 
 label{
