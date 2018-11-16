@@ -8,6 +8,7 @@
 }
 
 #nav-main {
+  all: unset;
   color: white;
   background: #f5f2e8;
   display: flex;
@@ -24,6 +25,7 @@
   }
 }
 #nav-title {
+  all: unset;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,18 +37,21 @@
 }
 
 #nav-title > a {
+  all: unset;
   text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #8a5ec7;
+  cursor: pointer;
 }
 
 #nav-burger {
+  all: unset;
   margin-left: 1em;
   cursor: pointer;
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 600px) {
   #nav-burger {
     display: none;
   }
@@ -77,6 +82,7 @@
 }
 
 .nav-logo {
+  all: unset;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,7 +107,7 @@
   width: 60%;
   justify-content: space-evenly;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   #nav-links {
     display: none;
   }
@@ -114,7 +120,7 @@
   overflow: hidden;
   align-items: center;
   transition: all 0.2s ease-out;
-  height: 100px;
+  height: auto;
   justify-content: space-between;
 }
 @media screen and (min-width: 600px) {
@@ -131,8 +137,8 @@
   align-items: center;
   padding-top: 1em;
   padding-bottom: 1em;
-  height: 100px;
-  max-height: 200px;
+  height: auto;
+  max-height: 300px;
   transition: all 0.2s ease-out;
 }
 @media screen and (max-width: 600px) {
@@ -147,9 +153,15 @@
 }
 
 .nav-link {
+  all: unset;
   color: #444444;
   text-decoration: none;
   font-size: 1.1em;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: #444444;
 }
 
 #nav-search {
@@ -166,6 +178,7 @@
 }
 
 #nav-search-form {
+  all: unset;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -175,11 +188,14 @@
   font-size: 100%;
 }
 #nav-search-item-textbox {
+  all: unset;
+  background: white;
+  color: black;
   width: 70%;
   height: 20px;
   border: 1px solid #eeeeee;
   border-radius: 5px;
-  font-size: 120%;
+  font-size: 110%;
   padding: 8px 40px 8px 8px;
   background-image: url(../img/search_large_ico.png);
   background-position: 95% center;
