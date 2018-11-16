@@ -14,10 +14,10 @@
       <a href="#"><h3> Sign Out </h3></a>
     </div>
 
-    <h3 id="update_title"> Enter the Updated Information </h3>
+    <h3 id="update_title"> Enter Information Below </h3>
 
-    <form action="/update-wishlist" method="POST">
-      <input type="hidden" name="wishlistId" value="{{id}}" />
+    <form action="/update-favorites" method="POST">
+      <input type="hidden" name="cellarId" value="{{id}}" />
       <h3>{{title}}</h3>
     </br>
       <input type="number" name="price" value="{{price}}" placeholder="Enter Price Here....." />

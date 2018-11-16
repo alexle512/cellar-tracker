@@ -3,20 +3,37 @@
   <head>
     <meta charset="utf-8">
     <title>My Favorites</title>
+    <link rel="stylesheet" type="text/css" href="css/cellar.css">
   </head>
   <body>
+
+  <h1 class="page_heading"> My Favorites </h1>
+
+  <div class="cellar_navbar">
     <a href="/favorites"><h3> My Favorites </h3></a>
     <a href="/cellar"><h3> My Cellar </h3></a>
     <a href="/wishlist"><h3> My Wishlist </h3></a>
+    <a href="#"><h3> Sign Out </h3></a>
+  </div>
 
-    <h1> My Favorites </h1>
-
-    <ul>
-      {{#favorites}}
-        <li>{{beverage}}</li>
-        <label>${{price}}</label>
-        <label>Notes: {{notes}} </label>
-      {{/favorites}}
-    </ul>
+  <ul class="list_container">
+    {{#favorites}}
+    <div class="info">
+      <li><strong>{{title}}</strong></li>
+      <li> {{category}} </li>
+      <li> {{creator}} </li>
+      <li> {{review}}  </li>
+  <h6>***To add price and notes click Update ***</h6>
+      <div class="cellar_button">
+  <form action="/delete-favorites" method="POST">
+    <input type="hidden" name="favoritesId"
+    value="{{id}}" />
+    <input type="submit" value="Remove" />
+  </form>
+      <a href="/update-favorites/{{id}}"> Update </a>
+      </div>
+    </div>
+    {{/favorites}}
+  </ul>
   </body>
 </html>
