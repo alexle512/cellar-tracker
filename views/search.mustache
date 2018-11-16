@@ -4,15 +4,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Searc -->
   <link rel="stylesheet" href="/css/search.css">
+
+  <!-- Nav Bar -->
+  <link rel="stylesheet" href="/css/navigation.css">
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <title>Search</title>
 </head>
 <body>
+
+<!-- Nav Bar -->
+    <div id="nav">
+      <div id="nav-main">
+        <div id="nav-burger" onclick="toggleBurger(this)">
+          <div id="burger-top"></div>
+          <div id="burger-mid"></div>
+          <div id="burger-bot"></div>
+        </div>
+        <div id="nav-title">
+          <a href="/myCellar">
+          <div class="nav-logo">C</div>ellar
+          </a>
+        </div>
+        <div id="nav-links">
+          <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
+          <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
+          <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
+        </div>
+        <div id="nav-search">
+          <form id="nav-search-form" action="/search/beer" method="post" >
+            <input id="nav-search-item-textbox" type="textbox" name="itemName">
+          </form>
+        </div>
+      </div>
+      <div id="nav-links-dropdown">
+        <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
+        <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
+        <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
+      </div>
+    </div>
+<!-- End Nav Bar -->
+
   <div id="search-root">
-
     <div id="search-container">
-
       <div id="search-bar">
         <form id="search-form" action="/search/{{type}}" method="post" >
           <input id="search-item-textbox" type="textbox" name="itemName">
@@ -202,9 +238,18 @@
   } catch(err) {}
 
   try {
-  const resultsEl = document.querySelector(`[data-results='${path}'`)
-  resultsEl.style.display= "block"
+    const resultsEl = document.querySelector(`[data-results='${path}'`)
+    resultsEl.style.display= "block"
   } catch(err) {}
+
+
+  // Navigation
+
+  const toggleBurger = function(el) {
+    el.classList.toggle("change")
+    const navLinksEl = document.getElementById("nav-links-dropdown")
+    navLinksEl.classList.toggle("open")
+  }
 
 </script>
 </html>
