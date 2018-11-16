@@ -111,6 +111,17 @@ app.post("/register", function(req, res) {
     })
 })
 
+
+// SIGN OUT
+app.post('/logout', function(req, res){
+
+
+ req.session.destroy()
+
+ res.redirect('login')
+});
+
+
 app.get("/myCellar", function(req, res) {
   res.render("myCellar")
 })
