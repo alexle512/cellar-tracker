@@ -151,6 +151,15 @@ app.get("/favorites", function(req, res) {
   })
 })
 
+
+app.get('/reviews', function (req,res){
+  models.review.findAll().then(function(reviews){
+      res.render('review',{reviews : reviews})
+  })
+  
+})
+
+
 app.post("/delete-wishlist", function(req, res) {
   let id = req.body.wishlistId
 
@@ -160,6 +169,8 @@ app.post("/delete-wishlist", function(req, res) {
     res.render("delete-wishlist", { beverage: wishlist.beverage })
   })
 })
+
+
 
 app.post("/update-wishlist", function(req, res) {
   let id = req.body.wishlistId
@@ -182,6 +193,31 @@ app.post("/update-wishlist", function(req, res) {
       })
   })
 })
+
+
+app.post('/reviews', function (req,res){
+
+  let product = req.body.product
+  let rating = req.body.rating
+  let category = req.body.category
+
+  
+  const review = models.review.build({
+  rating: rating,
+  product: product,
+  category: category,})
+
+  review.save().then(function(newReview){
+    models.review.findAll().then(function(reviews){
+
+        res.render('review',{reviews : reviews})
+    })
+})
+  })
+
+
+
+
 
 app.get("/update-wishlist/:id", function(req, res) {
   let id = req.params.id
