@@ -1,8 +1,7 @@
-// const dotenv = require("dotenv").config()
+const dotenv = require("dotenv").config()
 
 module.exports = {
   development: {
-    use_env_variable: process.env.DATABASE_URL,
     database: process.env.DEV_NAME,
     username: process.env.DEV_UN,
     password: process.env.DEV_PW,
