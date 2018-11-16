@@ -1,0 +1,33 @@
+.cellar_heading {
+
+}
+
+.page_heading {
+
+}
+
+.list_container {
+
+}
+
+.info {
+  list-style: none;
+  margin-top: 25px;
+  display: inline-block;
+  margin-right: 30px;
+
+}
+
+.cellar_buttons {
+  display: flex;
+
+}
+
+.update_button {
+  margin-left: 100px;
+}
+
+h6 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}

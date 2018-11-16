@@ -2,28 +2,38 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/cellar.css">
     <title>My Favorites</title>
   </head>
   <body>
-    <a href="/favorites"><h3> My Favorites </h3></a>
-    <a href="/cellar"><h3> My Cellar </h3></a>
-    <a href="/wishlist"><h3> My Wishlist</h3></a>
 
-    <h1> My Wish List </h1>
+    <h1 class="page_heading"> My Wish List </h1>
 
-    <ul>
+    <div class="cellar_navbar">
+      <a href="/favorites"><h3> My Favorites </h3></a>
+      <a href="/cellar"><h3> My Cellar </h3></a>
+      <a href="/wishlist"><h3> My Wishlist </h3></a>
+      <a href="#"><h3> Sign Out </h3></a>
+    </div>
+
+    <ul class="list_container">
       {{#wishlists}}
-        <li><strong>{{beverage}}</strong></li>
-        <li>${{price}}</li>
-        <li>Notes: {{notes}} </li>
+      <div class="info">
+        <li><strong>{{title}}</strong></li>
+        <li>{{category}} </li>
+        <li>{{creator}}</li>
+        <li>{{review}}</li>
+      <h6>***To add price and notes click Update ***</h6>
+        <div class="cellar_button">
       <form action="/delete-wishlist" method="POST">
         <input type="hidden" name="wishlistId"
         value="{{id}}" />
         <input type="submit" value="Remove" />
       </form>
         <a href="/update-wishlist/{{id}}"> Update </a>
+        </div>
+      </div>
       {{/wishlists}}
-
     </ul>
   </body>
 </html>
