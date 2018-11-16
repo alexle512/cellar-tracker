@@ -11,13 +11,45 @@
      <link rel="stylesheet" href="/css/navigation.css">
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+     <script>
+
+       const path = window.location.pathname.split("/").pop()
+       const filterEl = document.querySelector(`[data-filter='${path}'`)
+       filterEl.classList.add("active")
+
+
+       try {
+         const noResultsEl = document.querySelector(`[data-noresults='${path}'`)
+         noResultsEl.style.display= "block"
+       } catch(err) {}
+
+       try {
+         const resultsEl = document.querySelector(`[data-results='${path}'`)
+         resultsEl.style.display= "block"
+       } catch(err) {}
+
+
+       // Navigation
+
+       const toggleBurger = function(el) {
+         el.classList.toggle("change")
+         const navLinksEl = document.getElementById("nav-links-dropdown")
+         navLinksEl.classList.toggle("open")
+       }
+
+     </script>
+
      <title>myCellar</title>
      <style>
      @import url("https://fonts.googleapis.com/css?family=Roboto");
      </style>
    </head>
    <body>
-
+     <div class="bg">
      <!-- Nav Bar -->
          <div id="nav">
            <div id="nav-main">
@@ -59,6 +91,7 @@
           <button id="signout-btn" type="button" class="btn btn-outline-warning btn-lg">Sign Out</button>
         </div>
      </div>
+<<<<<<< HEAD
     <!-- End Main Content -->
    </body>
 
@@ -73,4 +106,11 @@
        navLinksEl.classList.toggle("open")
      }
    </script>
+=======
+   </div>
+
+   </body>
+
+
+>>>>>>> master
  </html>
