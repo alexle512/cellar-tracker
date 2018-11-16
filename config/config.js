@@ -19,5 +19,3 @@ module.exports = {
     dialect: "postgres"
   }
 }
-
-console.log(process.env.DEV_NAME)
