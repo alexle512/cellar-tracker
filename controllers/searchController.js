@@ -20,7 +20,7 @@ const wineDB = require(__dirname + "/../models/wine")(
   sequelize,
   Sequelize.DataTypes
 )
-const whiskyDB = require(__direname + "/../models/whisky")(
+const whiskyDB = require(__dirname + "/../models/whisky")(
   sequelize,
   Sequelize.DataTypes
 )
