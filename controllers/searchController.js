@@ -2,7 +2,6 @@ const Sequelize = require("sequelize")
 const config = require(__dirname + "/../config/config")
 const { productData } = config
 
-console.log(productData)
 const sequelize = new Sequelize(
   productData.database,
   productData.username,
@@ -13,9 +12,18 @@ const sequelize = new Sequelize(
   }
 )
 
-const beerDB = require("../models/beer")(sequelize, Sequelize.DataTypes)
-const wineDB = require("../models/wine")(sequelize, Sequelize.DataTypes)
-const whiskyDB = require("../models/whisky")(sequelize, Sequelize.DataTypes)
+const beerDB = require(__dirname + "/../models/beer")(
+  sequelize,
+  Sequelize.DataTypes
+)
+const wineDB = require(__dirname + "/../models/wine")(
+  sequelize,
+  Sequelize.DataTypes
+)
+const whiskyDB = require(__direname + "/../models/whisky")(
+  sequelize,
+  Sequelize.DataTypes
+)
 
 let searchResults = { beers: [], wines: [], whisky: [] }
 
