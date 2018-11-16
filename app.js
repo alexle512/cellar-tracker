@@ -137,16 +137,16 @@ app.use("/search", search)
 //
 // })
 
-  // cellar.save().then(function() {
-  //
-  //   })
+// cellar.save().then(function() {
+//
+//   })
 
-  // if(!$('input').val()){
-  //     $('#button').hide();
-  // }
-  // else {
-  //     $('#button').show();
-  // }
+// if(!$('input').val()){
+//     $('#button').hide();
+// }
+// else {
+//     $('#button').show();
+// }
 app.get("/wishlist", function(req, res) {
   models.wishlist.findAll().then(function(wishlists) {
     res.render("wishlist", { wishlists: wishlists })
@@ -166,7 +166,6 @@ app.get("/favorites", function(req, res) {
 })
 
 app.post("/cellar", function(req, res) {
-
   let title = req.body.title
   let creator = req.body.creator
   let review = req.body.review
@@ -178,13 +177,12 @@ app.post("/cellar", function(req, res) {
     review: review,
     category: category
   })
-  beer.save().then(function(){
-    res.render("cellar", { cellar: cellar})
+  beer.save().then(function() {
+    res.render("cellar", { cellar: cellar })
   })
 })
 
 app.post("/delete-cellar", function(req, res) {
-
   let id = req.body.cellarId
 
   models.cellar.findById(id).then(function(cellar) {
@@ -195,7 +193,6 @@ app.post("/delete-cellar", function(req, res) {
 })
 
 app.post("/update-cellar", function(req, res) {
-
   let id = req.body.cellarId
 
   let title = req.body.title
@@ -218,12 +215,11 @@ app.post("/update-cellar", function(req, res) {
       })
       .then(function() {
         res.render("update-cellar")
-    })
+      })
   })
 })
 
 app.get("/update-cellar/:id", function(req, res) {
-
   let id = req.params.id
 
   models.cellar.findById(id).then(function(cellar) {
@@ -237,7 +233,6 @@ app.get("/update-cellar/:id", function(req, res) {
 })
 
 app.post("/wishlist", function(req, res) {
-
   let title = req.body.title
   let creator = req.body.creator
   let review = req.body.review
@@ -249,21 +244,18 @@ app.post("/wishlist", function(req, res) {
     review: review,
     category: category
   })
-  wishlist.save().then(function(){
+  wishlist.save().then(function() {
     res.render("cellar", { wishlists: wishlists })
   })
 })
 
-app.get('/reviews', function (req,res){
-  models.review.findAll().then(function(reviews){
-      res.render('review',{reviews : reviews})
+app.get("/reviews", function(req, res) {
+  models.review.findAll().then(function(reviews) {
+    res.render("review", { reviews: reviews })
   })
-
 })
 
-
 app.post("/delete-wishlist", function(req, res) {
-
   let id = req.body.wishlistId
 
   models.wishlist.findById(id).then(function(wishlist) {
@@ -274,7 +266,6 @@ app.post("/delete-wishlist", function(req, res) {
 })
 
 app.post("/update-wishlist", function(req, res) {
-
   let id = req.body.wishlistId
 
   let title = req.body.title
@@ -297,37 +288,29 @@ app.post("/update-wishlist", function(req, res) {
       })
       .then(function() {
         res.render("update-wishlist")
-    })
+      })
   })
 })
 
-
-app.post('/reviews', function (req,res){
-
+app.post("/reviews", function(req, res) {
   let product = req.body.product
   let rating = req.body.rating
   let category = req.body.category
 
-
   const review = models.review.build({
-  rating: rating,
-  product: product,
-  category: category,})
-
-  review.save().then(function(newReview){
-    models.review.findAll().then(function(reviews){
-
-        res.render('review',{reviews : reviews})
-    })
-})
+    rating: rating,
+    product: product,
+    category: category
   })
 
-
-
-
+  review.save().then(function(newReview) {
+    models.review.findAll().then(function(reviews) {
+      res.render("review", { reviews: reviews })
+    })
+  })
+})
 
 app.get("/update-wishlist/:id", function(req, res) {
-
   let id = req.params.id
 
   models.wishlist.findById(id).then(function(wishlist) {
@@ -341,7 +324,6 @@ app.get("/update-wishlist/:id", function(req, res) {
 })
 
 app.post("/favorites", function(req, res) {
-
   let title = req.body.title
   let creator = req.body.creator
   let review = req.body.review
@@ -354,12 +336,11 @@ app.post("/favorites", function(req, res) {
     category: category
   })
   favorite.save().then(function() {
-    res.render("cellar", { favorites: favorites})
+    res.render("cellar", { favorites: favorites })
   })
 })
 
 app.post("/delete-favorites", function(req, res) {
-
   let id = req.body.favoritestId
 
   models.favorite.findById(id).then(function(favorites) {
@@ -370,7 +351,6 @@ app.post("/delete-favorites", function(req, res) {
 })
 
 app.post("/update-favorites", function(req, res) {
-
   let id = req.body.favoritesId
 
   let title = req.body.title
@@ -393,12 +373,11 @@ app.post("/update-favorites", function(req, res) {
       })
       .then(function() {
         res.render("update-favorites")
-    })
+      })
   })
 })
 
 app.get("/update-favorites/:id", function(req, res) {
-
   let id = req.params.id
 
   models.favorite.findById(id).then(function(favorites) {
@@ -409,12 +388,15 @@ app.get("/update-favorites/:id", function(req, res) {
       notes: favorites.notes
     })
   })
+})
+
 // Reviews
 app.get("/reviews", function(req, res) {
   models.review.findAll().then(function(reviews) {
     res.render("review", { reviews: reviews })
   })
 })
+
 app.post("/reviews", function(req, res) {
   let product = req.body.product
   let rating = req.body.rating
