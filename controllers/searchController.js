@@ -11,6 +11,7 @@ const sequelize = new Sequelize(
     dialect: "postgres"
   }
 )
+console.log(productData)
 
 const beerDB = require("../models/beer")(sequelize, Sequelize.DataTypes)
 const wineDB = require("../models/wine")(sequelize, Sequelize.DataTypes)
