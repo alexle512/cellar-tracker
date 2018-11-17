@@ -148,11 +148,19 @@
             </div>
 
             <div class="item-add-container">
-              <form class="item-add-btn" action="" method="post" >
+              <form class="item-add-btn" action="/review" method="post" >
                 <input class="item-add-btn" type="submit" value="Review">
+                <input type="hidden" value="{{ title }}" name="title">
+                <input type="hidden" value="{{ winery }}" name="creator">
+                <input type="hidden" value="{{ points }}" name="review">
+                <input type="hidden" value="{{ variety }}" name="category">
               </form>
-              <form class="item-add-btn" action="" method="post" >
+              <form class="item-add-btn" action="/cellar" method="post" >
                 <input class="item-add-btn" type="submit" value="Add to Cellar">
+                <input type="hidden" value="{{ title }}" name="title">
+                <input type="hidden" value="{{ winery }}" name="creator">
+                <input type="hidden" value="{{ points }}" name="review">
+                <input type="hidden" value="{{ variety }}" name="category">
               </form>
 
               <div class="item-icons-add">
