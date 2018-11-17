@@ -9,6 +9,7 @@ const search = require('./routes/search')
 const session = require('express-session')
 
 const models = require('./models')
+const { checkForUser } = require('./controllers/searchController')
 /**
  * Init
  */
@@ -38,6 +39,9 @@ app.use(
 /**
  * Custon Middleware
  */
+app.use('/cellar', checkForUser)
+app.use('/myCellar', checkForUser)
+app.use('/reviews', checkForUser)
 
 /**
  * Route Config
@@ -231,4 +235,7 @@ app.post('/reviews', function(req, res) {
   })
 })
 
+app.use((req, res, next) => {
+  res.redirect('/myCellar')
+})
 module.exports = app
