@@ -1,7 +1,6 @@
-const Sequelize = require("sequelize")
-const config = require(__dirname + "/../config/config")
+const Sequelize = require('sequelize')
+const config = require(__dirname + '/../config/config')
 const { productData } = config
-console.log(`pd: ${productData.username}`)
 
 const sequelize = new Sequelize(
   productData.database,
@@ -9,23 +8,22 @@ const sequelize = new Sequelize(
   productData.password,
   {
     host: productData.host,
-    dialect: "postgres"
+    dialect: 'postgres'
   }
 )
 
-const beerDB = require(__dirname + "/../models/beer")(
+const beerDB = require(__dirname + '/../models/beer')(
   sequelize,
   Sequelize.DataTypes
 )
-const wineDB = require(__dirname + "/../models/wine")(
+const wineDB = require(__dirname + '/../models/wine')(
   sequelize,
   Sequelize.DataTypes
 )
-const whiskyDB = require(__dirname + "/../models/whisky")(
+const whiskyDB = require(__dirname + '/../models/whisky')(
   sequelize,
   Sequelize.DataTypes
 )
-console.log(`beerDB: ${beerDB}`)
 
 let searchResults = { beers: [], wines: [], whisky: [] }
 
@@ -34,20 +32,20 @@ const checkForUser = async (req, res, next) => {
     if (req.session.username) {
       next()
     } else {
-      res.redirect("/login")
+      res.redirect('/login')
     }
   } catch (err) {
-    res.redirect("/login")
+    res.redirect('/login')
   }
 }
 
 const redirectSearch = async (req, res) => {
-  const type = req.params.type || "beer"
-  res.redirect(`search/beer`)
+  const type = req.params.type || 'beer'
+  res.redirect(`/search/${type}`)
 }
 
 const displaySearch = async (req, res) => {
-  const type = req.params.type || "beer"
+  const type = req.params.type || 'beer'
   const noResults = {
     beer: searchResults.beers.length === 0,
     wine: searchResults.wines.length === 0,
@@ -64,7 +62,7 @@ const querySearch = async (req, res) => {
   let offset = 0
 
   // Fetch From Database / Search
-  if (itemName.trim() !== "") {
+  if (itemName.trim() !== '') {
     const beers = await searchBeers(itemName, limit, offset)
     const wines = await searchWines(itemName, limit, offset)
     const whisky = await searchWhisky(itemName, limit, offset)
@@ -102,12 +100,12 @@ const searchWhisky = async (query, limit, offset) =>
 
 const fetchFromInit = () => {
   const wines = allWines.filter(
-    wine =>
+    (wine) =>
       wine.title.toUpperCase().includes(itemName.toUpperCase()) ||
       wine.winery.toUpperCase().includes(itemName.toUpperCase())
   )
   const beers = allBeers.filter(
-    beer =>
+    (beer) =>
       beer.beerName.toUpperCase().includes(itemName.toUpperCase()) ||
       beer.breweryName.toUpperCase().includes(itemName.toUpperCase())
   )

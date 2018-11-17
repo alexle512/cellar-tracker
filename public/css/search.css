@@ -227,6 +227,10 @@ body {
   justify-content: flex-end;
 }
 
+.item-review-wine > .fas {
+  margin-left: 1em;
+}
+
 .item-add-container {
   display: flex;
   justify-content: space-between;

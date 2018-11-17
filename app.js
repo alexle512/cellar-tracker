@@ -1,35 +1,36 @@
 /**
  * Imports
  */
-const express = require("express")
-const path = require("path")
-const bodyParser = require("body-parser")
-const mustacheExpress = require("mustache-express")
-const search = require("./routes/search")
-const session = require("express-session")
+const express = require('express')
+const path = require('path')
+const bodyParser = require('body-parser')
+const mustacheExpress = require('mustache-express')
+const search = require('./routes/search')
+const session = require('express-session')
 
-const models = require("./models")
+const models = require('./models')
+const { checkForUser } = require('./controllers/searchController')
 /**
  * Init
  */
 const app = express()
 
 // View Engine
-app.engine("mustache", mustacheExpress())
-app.set("views", path.join(__dirname, "views"))
-app.set("view engine", "mustache")
+app.engine('mustache', mustacheExpress())
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'mustache')
 
 // body-parser
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // Public Files
-app.use(express.static(path.join(__dirname, "public")))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Sessions
 app.use(
   session({
-    secret: "rigby",
+    secret: 'rigby',
     resave: false,
     saveUninitialized: true
   })
@@ -38,17 +39,20 @@ app.use(
 /**
  * Custon Middleware
  */
+app.use('/cellar', checkForUser)
+app.use('/myCellar', checkForUser)
+app.use('/reviews', checkForUser)
 
 /**
  * Route Config
  */
 
 // Login
-app.get("/login", function(req, res) {
-  res.render("login")
+app.get('/login', function(req, res) {
+  res.render('login')
 })
 
-app.post("/login", function(req, res) {
+app.post('/login', function(req, res) {
   let username = req.body.username
   let password = req.body.password
 
@@ -61,19 +65,19 @@ app.post("/login", function(req, res) {
     })
     .then(function(user) {
       if (!user) {
-        res.render("login", { message: "Invalid username/password..." })
+        res.render('login', { message: 'Invalid username/password...' })
       } else {
         if (req.session) {
           req.session.userid = user.id
           req.session.username = user.username
         }
 
-        res.redirect("/myCellar")
+        res.redirect('/myCellar')
       }
     })
 })
 
-app.post("/register", function(req, res) {
+app.post('/register', function(req, res) {
   let firstName = req.body.firstName
   let lastName = req.body.lastName
   let username = req.body.username
@@ -91,7 +95,7 @@ app.post("/register", function(req, res) {
       // this user with username already exists
       if (user) {
         // this means that user exists
-        res.render("register", { message: "Username is already registered..." })
+        res.render('register', { message: 'Username is already registered...' })
       } else {
         // if username does not exist already in database
         // save user in the database
@@ -105,108 +109,83 @@ app.post("/register", function(req, res) {
         })
 
         userToSave.save().then(function(newUser) {
-          res.redirect("/login")
+          res.redirect('/login')
         })
       }
     })
 })
 
-app.get("/myCellar", function(req, res) {
-  res.render("myCellar")
+// SIGN OUT
+app.post('/logout', function(req, res) {
+  req.session.destroy()
+  res.redirect('login')
 })
 
-app.get("/register", function(req, res) {
-  res.render("register")
+app.get('/logout', function(req, res) {
+  req.session.destroy()
+  res.redirect('login')
 })
 
-app.get("/", function(req, res) {
-  res.render("login")
+app.get('/myCellar', function(req, res) {
+  res.render('myCellar')
+})
+
+app.get('/register', function(req, res) {
+  res.render('register')
+})
+
+app.get('/', function(req, res) {
+  res.render('login')
 })
 
 // SEARCH
-app.use("/search", search)
+app.use('/search', search)
 
 // CELLAR
-
-// let cellar = models.favorite.build({
-//
-//   title: "Steampunk Octopus Spirit",
-//   price: 78.98,
-//   notes: "Christmas",
-//   user_id: 2
-//
-// })
-
-// cellar.save().then(function() {
-//
-//   })
-
-// if(!$('input').val()){
-//     $('#button').hide();
-// }
-// else {
-//     $('#button').show();
-// }
-app.get("/wishlist", function(req, res) {
-  models.wishlist.findAll().then(function(wishlists) {
-    res.render("wishlist", { wishlists: wishlists })
-  })
+app.get('/cellar', function(req, res) {
+  models.cellar
+    .findAll({
+      where: { user_id: req.session.userid }
+    })
+    .then(function(cellars) {
+      console.log(cellars)
+      res.render('cellar', { cellers: cellars, username: req.session.username })
+    })
 })
 
-app.get("/cellar", function(req, res) {
-  models.cellar.findAll().then(function(cellers) {
-    res.render("cellar", { lists: cellers })
-  })
-})
-
-app.get("/favorites", function(req, res) {
-  models.favorite.findAll().then(function(favorites) {
-    res.render("favorites", { favorites: favorites })
-  })
-})
-
-app.post("/cellar", function(req, res) {
-  let title = req.body.title
-  let creator = req.body.creator
-  let review = req.body.review
-  let category = req.body.category
-
-  let cellar = models.cellar.build({
+app.post('/cellar', function(req, res) {
+  const title = req.body.title
+  const creator = req.body.creator
+  const review = req.body.review
+  const category = req.body.category
+  const cellar = models.cellar.build({
     title: title,
     creator: creator,
     review: review,
-    category: category
+    category: category,
+    user_id: req.session.userid
   })
-  beer.save().then(function() {
-    res.render("cellar", { cellar: cellar })
+  cellar.save().then(function() {
+    res.redirect('/cellar')
   })
 })
 
-app.post("/delete-cellar", function(req, res) {
+app.post('/delete-cellar', function(req, res) {
   let id = req.body.cellarId
-
   models.cellar.findById(id).then(function(cellar) {
     cellar.destroy()
-
-    res.render("delete-cellar", { title: cellar.title })
+    res.render('delete-cellar', { title: cellar.title })
   })
 })
 
-app.post("/update-cellar", function(req, res) {
+app.post('/update-cellar', function(req, res) {
   let id = req.body.cellarId
-
   let title = req.body.title
-
   let creator = req.body.creator
-
   let review = req.body.review
-
   let category = req.body.category
-
   let price = parseFloat(req.body.price)
-
   let notes = req.body.notes
-
   models.cellar.findById(id).then(function(cellar) {
     cellar
       .update({
@@ -214,16 +193,15 @@ app.post("/update-cellar", function(req, res) {
         notes: notes
       })
       .then(function() {
-        res.render("update-cellar")
+        res.render('update-cellar')
       })
   })
 })
 
-app.get("/update-cellar/:id", function(req, res) {
+app.get('/update-cellar/:id', function(req, res) {
   let id = req.params.id
-
   models.cellar.findById(id).then(function(cellar) {
-    res.render("update-cellar", {
+    res.render('update-cellar', {
       id: cellar.id,
       title: cellar.title,
       price: cellar.price,
@@ -232,69 +210,16 @@ app.get("/update-cellar/:id", function(req, res) {
   })
 })
 
-app.post("/wishlist", function(req, res) {
-  let title = req.body.title
-  let creator = req.body.creator
-  let review = req.body.review
-  let category = req.body.category
-
-  let wishlist = models.wishlist.build({
-    title: title,
-    creator: creator,
-    review: review,
-    category: category
-  })
-  wishlist.save().then(function() {
-    res.render("cellar", { wishlists: wishlists })
-  })
-})
-
-app.get("/reviews", function(req, res) {
+// Reviews
+app.get('/reviews', function(req, res) {
   models.review.findAll().then(function(reviews) {
-    res.render("review", { reviews: reviews })
+    res.render('review', { reviews: reviews })
   })
 })
 
-app.post("/delete-wishlist", function(req, res) {
-  let id = req.body.wishlistId
-
-  models.wishlist.findById(id).then(function(wishlist) {
-    wishlist.destroy()
-
-    res.render("delete-wishlist", { title: wishlist.title })
-  })
-})
-
-app.post("/update-wishlist", function(req, res) {
-  let id = req.body.wishlistId
-
-  let title = req.body.title
-
-  let creator = req.body.creator
-
-  let review = req.body.review
-
-  let category = req.body.category
-
-  let price = parseFloat(req.body.price)
-
-  let notes = req.body.notes
-
-  models.wishlist.findById(id).then(function(wishlist) {
-    wishlist
-      .update({
-        price: price,
-        notes: notes
-      })
-      .then(function() {
-        res.render("update-wishlist")
-      })
-  })
-})
-
-app.post("/reviews", function(req, res) {
-  let product = req.body.product
-  let rating = req.body.rating
+app.post('/reviews', function(req, res) {
+  let product = req.body.title
+  let rating = req.body.review
   let category = req.body.category
 
   const review = models.review.build({
@@ -303,104 +228,14 @@ app.post("/reviews", function(req, res) {
     category: category
   })
 
-  review.save().then(function(newReview) {
+  review.save().then(function() {
     models.review.findAll().then(function(reviews) {
-      res.render("review", { reviews: reviews })
+      res.render('review', { reviews: reviews })
     })
   })
 })
 
-app.get("/update-wishlist/:id", function(req, res) {
-  let id = req.params.id
-
-  models.wishlist.findById(id).then(function(wishlist) {
-    res.render("update-wishlist", {
-      id: wishlist.id,
-      title: wishlist.title,
-      price: wishlist.price,
-      notes: wishlist.notes
-    })
-  })
+app.use((req, res, next) => {
+  res.redirect('/myCellar')
 })
-
-app.post("/favorites", function(req, res) {
-  let title = req.body.title
-  let creator = req.body.creator
-  let review = req.body.review
-  let category = req.body.category
-
-  let favorite = models.favorite.build({
-    title: title,
-    creator: creator,
-    review: review,
-    category: category
-  })
-  favorite.save().then(function() {
-    res.render("cellar", { favorites: favorites })
-  })
-})
-
-app.post("/delete-favorites", function(req, res) {
-  let id = req.body.favoritestId
-
-  models.favorite.findById(id).then(function(favorites) {
-    favorites.destroy()
-
-    res.render("delete-favorite", { title: favorites.title })
-  })
-})
-
-app.post("/update-favorites", function(req, res) {
-  let id = req.body.favoritesId
-
-  let title = req.body.title
-
-  let creator = req.body.creator
-
-  let review = req.body.review
-
-  let category = req.body.category
-
-  let price = parseFloat(req.body.price)
-
-  let notes = req.body.notes
-
-  models.favorite.findById(id).then(function(favorites) {
-    favorites
-      .update({
-        price: price,
-        notes: notes
-      })
-      .then(function() {
-        res.render("update-favorites")
-      })
-  })
-})
-
-app.get("/update-favorites/:id", function(req, res) {
-  let id = req.params.id
-
-  models.favorite.findById(id).then(function(favorites) {
-    res.render("update-favorites", {
-      id: favorites.id,
-      title: favorites.title,
-      price: favorites.price,
-      notes: favorites.notes
-    })
-  })
-})
-
-// Reviews
-app.get("/reviews", function(req, res) {
-  models.review.findAll().then(function(reviews) {
-    res.render("review", { reviews: reviews })
-  })
-})
-
-app.post("/reviews", function(req, res) {
-  let product = req.body.product
-  let rating = req.body.rating
-  let category = req.body.category
-})
-
 module.exports = app

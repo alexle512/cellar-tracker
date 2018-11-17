@@ -31,7 +31,7 @@
         <div id="nav-links">
           <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
           <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
-          <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
+          <div class="nav-link-container"><a class="nav-link"href="/logout">Logout</a></div>
         </div>
         <div id="nav-search">
           <form id="nav-search-form" action="/search/beer" method="post" >
@@ -42,7 +42,7 @@
       <div id="nav-links-dropdown">
         <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
         <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
-        <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
+        <div class="nav-link-container"><a class="nav-link"href="/logout"></a></div>
       </div>
     </div>
 <!-- End Nav Bar -->
@@ -102,14 +102,22 @@
             </div>
 
             <div class="item-add-container">
-              <form class="item-add-btn" action="" method="post" >
+              <form class="item-add-btn" action="/reviews" method="post" >
                 <input class="item-add-btn" type="submit" value="Review">
+                <input type="hidden" value="{{ beerName }}" name="title">
+                <input type="hidden" value="{{ breweryName }}" name="creator">
+                <input type="hidden" value="{{ reviewAverage }}" name="review">
+                <input type="hidden" value="{{ beerStyle }}" name="category">
               </form>
-              <form class="item-add-btn" action="" method="post" >
+              <form class="item-add-btn" action="/cellar" method="post" >
                 <input class="item-add-btn" type="submit" value="Add to Cellar">
+                <input type="hidden" value="{{ beerName }}" name="title">
+                <input type="hidden" value="{{ breweryName }}" name="creator">
+                <input type="hidden" value="{{ reviewAverage }}" name="review">
+                <input type="hidden" value="{{ beerStyle }}" name="category">
               </form>
 
-              <div class="item-icons-add">
+              {{! <div class="item-icons-add">
                 <form class="item-favorite" action="" method="post" >
                   <button class="item-favorite-btn">
                     <i class="fas fa-heart"></i>
@@ -120,7 +128,7 @@
                     <i class="fas fa-gift"></i>
                   </button>
                 </form>
-              </div>
+              </div> }}
             </div>
 
           </div>
@@ -148,14 +156,22 @@
             </div>
 
             <div class="item-add-container">
-              <form class="item-add-btn" action="" method="post" >
+              <form class="item-add-btn" action="/reviews" method="post" >
                 <input class="item-add-btn" type="submit" value="Review">
+                <input type="hidden" value="{{ title }}" name="title">
+                <input type="hidden" value="{{ winery }}" name="creator">
+                <input type="hidden" value="{{ points }}" name="review">
+                <input type="hidden" value="{{ variety }}" name="category">
               </form>
-              <form class="item-add-btn" action="" method="post" >
+              <form class="item-add-btn" action="/cellar" method="post" >
                 <input class="item-add-btn" type="submit" value="Add to Cellar">
+                <input type="hidden" value="{{ title }}" name="title">
+                <input type="hidden" value="{{ winery }}" name="creator">
+                <input type="hidden" value="{{ points }}" name="review">
+                <input type="hidden" value="{{ variety }}" name="category">
               </form>
 
-              <div class="item-icons-add">
+              {{! <div class="item-icons-add">
                 <form class="item-favorite" action="" method="post" >
                   <button class="item-favorite-btn">
                     <i class="fas fa-heart"></i>
@@ -166,7 +182,7 @@
                     <i class="fas fa-gift"></i>
                   </button>
                 </form>
-              </div>
+              </div> }}
             </div>
 
           </div>
@@ -186,26 +202,30 @@
                 <div class="item-brand"> {{ brand }} </div>
                 <div class="item-style">  {{ class }} </div>
               </div>
-              <div class="review-info-container">
-                <div class="item-abv"> 
-                  {{ #beerAbv }} {{ beerAbv }} % ABV {{/beerAbv}}
-                  {{ ^beerAbv }} NA % ABV {{/beerAbv}}
-                </div>
-                <div class="item-review"> 
+              <div class="review-info-container-wine">
+                <div class="item-review-wine"> 
                   {{ reviews }} <i class="fas fa-star"></i>
                 </div>
               </div>
             </div>
 
             <div class="item-add-container">
-              <form class="item-add-btn" action="" method="post" >
+              <form class="item-add-btn" action="/reviews" method="post" >
                 <input class="item-add-btn" type="submit" value="Review">
+                <input type="hidden" value="{{ whiskey }}" name="title">
+                <input type="hidden" value="{{ brand }}" name="creator">
+                <input type="hidden" value="{{ reviews  }}" name="review">
+                <input type="hidden" value="{{ class }}" name="category">
               </form>
-              <form class="item-add-btn" action="" method="post" >
+              <form class="item-add-btn" action="/cellar" method="post" >
                 <input class="item-add-btn" type="submit" value="Add to Cellar">
+                <input type="hidden" value="{{ whiskey }}" name="title">
+                <input type="hidden" value="{{ brand }}" name="creator">
+                <input type="hidden" value="{{ reviews }}" name="review">
+                <input type="hidden" value="{{ class }}" name="category">
               </form>
 
-              <div class="item-icons-add">
+              {{! <div class="item-icons-add">
                 <form class="item-favorite" action="" method="post" >
                   <button class="item-favorite-btn">
                     <i class="fas fa-heart"></i>
@@ -216,7 +236,7 @@
                     <i class="fas fa-gift"></i>
                   </button>
                 </form>
-              </div>
+              </div> }}
             </div>
 
           </div>
