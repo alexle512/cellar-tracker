@@ -1,4 +1,4 @@
-const dotenv = require("dotenv").config()
+const dotenv = require('dotenv').config()
 
 module.exports = {
   development: {
@@ -7,7 +7,15 @@ module.exports = {
     password: process.env.DEV_PW,
     host: process.env.DEV_HOST,
     port: process.env.DEV_PORT,
-    dialect: "postgres"
+    dialect: 'postgres'
+  },
+  production: {
+    database: process.env.DEV_NAME,
+    username: process.env.DEV_UN,
+    password: process.env.DEV_PW,
+    host: process.env.DEV_HOST,
+    port: process.env.DEV_PORT,
+    dialect: 'postgres'
   },
   productData: {
     database: process.env.PD_DB,
@@ -15,6 +23,6 @@ module.exports = {
     password: process.env.PD_PW,
     host: process.env.PD_HOST,
     port: process.env.PD_PORT,
-    dialect: "postgres"
+    dialect: 'postgres'
   }
 }

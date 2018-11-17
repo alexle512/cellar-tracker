@@ -17,37 +17,37 @@
    </head>
    <body>
      <div class="bg">
-     <!-- Nav Bar -->
-         <div id="nav">
-           <div id="nav-main">
-             <div id="nav-burger" onclick="toggleBurger(this)">
-               <div id="burger-top"></div>
-               <div id="burger-mid"></div>
-               <div id="burger-bot"></div>
-             </div>
-             <div id="nav-title">
-               <a href="/myCellar">
-               <div class="nav-logo">C</div>ellar
-               </a>
-             </div>
-             <div id="nav-links">
-               <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
-               <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
-               <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
-             </div>
-             <div id="nav-search">
-               <form id="nav-search-form" action="/search/beer" method="post" >
-                 <input id="nav-search-item-textbox" type="textbox" name="itemName">
-               </form>
-             </div>
-           </div>
-           <div id="nav-links-dropdown">
-             <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
-             <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
-             <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
-           </div>
-         </div>
-     <!-- End Nav Bar -->
+<!-- Nav Bar -->
+    <div id="nav">
+      <div id="nav-main">
+        <div id="nav-burger" onclick="toggleBurger(this)">
+          <div id="burger-top"></div>
+          <div id="burger-mid"></div>
+          <div id="burger-bot"></div>
+        </div>
+        <div id="nav-title">
+          <a href="/myCellar">
+          <div class="nav-logo">C</div>ellar
+          </a>
+        </div>
+        <div id="nav-links">
+          <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
+          <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
+          <div class="nav-link-container"><a class="nav-link"href="/logout">Logout</a></div>
+        </div>
+        <div id="nav-search">
+          <form id="nav-search-form" action="/search/beer" method="post" >
+            <input id="nav-search-item-textbox" type="textbox" name="itemName">
+          </form>
+        </div>
+      </div>
+      <div id="nav-links-dropdown">
+        <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
+        <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
+        <div class="nav-link-container"><a class="nav-link"href="/logout">Logout</a></div>
+      </div>
+    </div>
+<!-- End Nav Bar -->
 
     <!-- Main Content -->
      <div id="frontPage">
@@ -55,7 +55,9 @@
           <a href="/cellar">myCellar</a>
           <a href="/reviews">myReviews</a>
           <a href="/profile">myProfile</a>
-          <button id="signout-btn" type="button" class="btn btn-outline-warning btn-lg">Sign Out</button>
+          <form action="/logout" method="post">
+                 <button id="button" type="submit" class="btn btn-outline-warning btn-lg" >Sign Out</button>
+               </form>
         </div>
      </div>
     <!-- End Main Content -->
