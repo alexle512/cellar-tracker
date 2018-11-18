@@ -148,7 +148,6 @@ app.get('/cellar', function(req, res) {
       where: { user_id: req.session.userid }
     })
     .then(function(cellars) {
-      console.log(cellars)
       res.render('cellar', { cellers: cellars, username: req.session.username })
     })
 })
