@@ -218,8 +218,8 @@ app.get('/reviews', function(req, res) {
 })
 
 app.post('/reviews', function(req, res) {
-  let product = req.body.title
-  let rating = req.body.review
+  let product = req.body.product
+  let rating = req.body.rating
   let category = req.body.category
 
   const review = models.review.build({
