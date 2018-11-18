@@ -174,6 +174,7 @@ $nav-secondary-color: #444444;
   justify-content: center;
   align-items: center;
   margin-right: 5%;
+  margin-bottom: 0;
   @media only screen and (max-width: 768px) {
     width: 30%;
   }
@@ -186,12 +187,12 @@ $nav-secondary-color: #444444;
 }
 
 #nav-search-form {
+  all: unset;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   font-family: 'Roboto', sans-serif;
-  justify-content: space-between;
   font-size: 100%;
 }
 

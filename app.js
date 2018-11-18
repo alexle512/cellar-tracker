@@ -212,8 +212,24 @@ app.get('/update-cellar/:id', function(req, res) {
 
 // Reviews
 app.get('/reviews', function(req, res) {
+  const product = req.body.title || ''
   models.review.findAll().then(function(reviews) {
-    res.render('review', { reviews: reviews })
+    res.render('review', { reviews: reviews, product: product })
+  })
+})
+
+app.post('/reviews-add', (req, res) => {
+  const product = req.body.title || ''
+  models.review.findAll().then(function(reviews) {
+    res.render('review', { reviews: reviews, product: product })
+  })
+})
+
+app.post('/reviews/:review_id/delete', (req, res) => {
+  const reviewId = req.params.review_id
+  models.review.findById(reviewId).then((reviewEntry) => {
+    reviewEntry.destroy()
+    res.redirect('/reviews')
   })
 })
 
