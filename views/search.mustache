@@ -105,14 +105,14 @@
                 <input type="hidden" value="{{ beerName }}" name="title">
                 <input type="hidden" value="{{ breweryName }}" name="creator">
                 <input type="hidden" value="{{ reviewAverage }}" name="review">
-                <input type="hidden" value="{{ beerStyle }}" name="category">
+                <input type="hidden" value="beer" name="category">
               </form>
               <form class="item-add-btn" action="/cellar" method="post" >
                 <input class="item-add-btn" type="submit" value="Add to Cellar">
                 <input type="hidden" value="{{ beerName }}" name="title">
                 <input type="hidden" value="{{ breweryName }}" name="creator">
                 <input type="hidden" value="{{ reviewAverage }}" name="review">
-                <input type="hidden" value="{{ beerStyle }}" name="category">
+                <input type="hidden" value="Beer" name="category">
               </form>
 
               {{! <div class="item-icons-add">
@@ -154,19 +154,19 @@
             </div>
 
             <div class="item-add-container">
-              <form class="item-add-btn" action="/reviews" method="post" >
+              <form class="item-add-btn" action="/reviews-add" method="post" >
                 <input class="item-add-btn" type="submit" value="Review">
                 <input type="hidden" value="{{ title }}" name="title">
                 <input type="hidden" value="{{ winery }}" name="creator">
                 <input type="hidden" value="{{ points }}" name="review">
-                <input type="hidden" value="{{ variety }}" name="category">
+                <input type="hidden" value="wine" name="category">
               </form>
               <form class="item-add-btn" action="/cellar" method="post" >
                 <input class="item-add-btn" type="submit" value="Add to Cellar">
                 <input type="hidden" value="{{ title }}" name="title">
                 <input type="hidden" value="{{ winery }}" name="creator">
                 <input type="hidden" value="{{ points }}" name="review">
-                <input type="hidden" value="{{ variety }}" name="category">
+                <input type="hidden" value="Wine" name="category">
               </form>
 
               {{! <div class="item-icons-add">
@@ -208,19 +208,19 @@
             </div>
 
             <div class="item-add-container">
-              <form class="item-add-btn" action="/reviews" method="post" >
+              <form class="item-add-btn" action="/reviews-add" method="post" >
                 <input class="item-add-btn" type="submit" value="Review">
                 <input type="hidden" value="{{ whisky }}" name="title">
                 <input type="hidden" value="{{ brand }}" name="creator">
                 <input type="hidden" value="{{ reviews  }}" name="review">
-                <input type="hidden" value="{{ class }}" name="category">
+                <input type="hidden" value="spirits" name="category">
               </form>
               <form class="item-add-btn" action="/cellar" method="post" >
                 <input class="item-add-btn" type="submit" value="Add to Cellar">
                 <input type="hidden" value="{{ whisky }}" name="title">
                 <input type="hidden" value="{{ brand }}" name="creator">
                 <input type="hidden" value="{{ reviews }}" name="review">
-                <input type="hidden" value="{{ class }}" name="category">
+                <input type="hidden" value="Spirits" name="category">
               </form>
 
               {{! <div class="item-icons-add">
