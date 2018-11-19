@@ -26,11 +26,6 @@ $nav-secondary-color: #444444;
   height: 50px;
   background: #ffc312;
 }
-@media only screen and (max-width: 768px) {
-  #nav {
-    justify-content: space-between;
-  }
-}
 
 #nav-title {
   all: unset;
@@ -181,7 +176,7 @@ $nav-secondary-color: #444444;
 }
 
 .nav-link-container {
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 600px) {
     padding-top: 0.7em;
   }
 }

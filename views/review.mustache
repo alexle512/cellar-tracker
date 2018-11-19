@@ -1,6 +1,7 @@
 <html>
 <head>
   <link rel="stylesheet" href="/css/search.css">
+  <link rel="stylesheet" href="/css/reviews.css">
   <link rel="stylesheet" href="/css/navigation.css">
   <title>Reviews</title>
 <head>
@@ -38,37 +39,61 @@
 </div>
 <!-- End Nav Bar -->
 
+<div id="reviews-root">
+  <form id="review-add-form" action="/reviews" method="POST">
+    Product:<br>
+    <input class="review-input" type="text" name="product" value="{{product}}">
+    <br>
+    Rating (1-5):<br>
+    <input class="review-input" type="integer" name="rating" required>
+    <br>
+    Category:<br>
+    <select id="category-select" name="category">
+      <option value="spirit">Spirit</option>
+      <option value="wine">Wine</option>
+      <option value="beer">Beer</option>
+      <option value="other">Other</option>
+    </select>
+    <br>
+    <input id="add-review-btn" type="submit" value="Add Review">
+  </form> 
 
-<form action="/reviews" method="POST">
-  Product:<br>
-  <input type="text" name="product" value="{{product}}">
-  <br>
-  Rating (1-5):<br>
-  <input type="integer" name="rating">
-  <br><br>
-  Category:<br>
-  <select name="category">
-  <option value="spirit">Spirit</option>
-  <option value="wine">Wine</option>
-  <option value="beer">Beer</option>
-  <option value="other">Other</option>
-</select>
-  <input type="submit" value="Submit">
-</form> 
 
-<ul id="reviewsTable" >
-{{#reviews}}
-    <li>
-    {{product}}
-    {{rating}}
-    {{category}}
-    <form action="/reviews/{{id}}/delete" method="post">
-      <input type="submit" value="delete">
-    </form>
-    </li>
-{{/reviews}}
+  <div id="reviews-container">
+    <div id="reviews-title">My Reviews</div>
+    <div id="subtitle-container">
+      <div id="subtitle-item" class="reviews-subtitle">Item</div>
+      <div id="subtitle-rating" class="reviews-subtitle">Rating</div>
+    </div>
+    {{#reviews}}
+      <div class="search-result-container">
+        <div class="search-info-container">
 
-</ul>
+          {{! <div class="item-image">
+          </div> }}
+
+          <div class="item-title-container">
+            <div class="item-title"> {{ product }} </div>
+            <div class="item-style">  {{ category }} </div>
+          </div>
+
+          <div class="review-info-container-wine">
+            <div class="item-review-wine"> 
+              {{ rating }} <i class="fas fa-star"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <form class="review-remove-form" action="/reviews/{{id}}/delete" method="post">
+          <input class="review-remove-btn" type="submit" value="Remove">
+        </form>
+      </div>
+    {{/reviews}}
+  </div>
+
+</div> <!-- End Reviews Root --> 
+
 
 
 </body>
