@@ -1,13 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 .cellar_heading {
-
 }
 
 .page_heading {
-
 }
 
 .list_container {
-
 }
 
 .info {
@@ -15,19 +13,78 @@
   margin-top: 25px;
   display: inline-block;
   margin-right: 30px;
-
 }
 
 .cellar_buttons {
   display: flex;
-
 }
 
 .update_button {
   margin-left: 100px;
 }
 
+#cellar-root {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 h6 {
   margin-top: 0px;
   margin-bottom: 0px;
+}
+
+#cellar-results-container {
+  display: flex;
+  flex-direction: column;
+  width: 40em;
+}
+@media only screen and (max-width: 678px) {
+  #cellar-results-container {
+    width: 20em;
+  }
+}
+@media only screen and (max-width: 320px) {
+  #cellar-results-container {
+    width: 18em;
+  }
+}
+
+.cellar-result-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+  border-top: 1px solid #e2e2e2;
+}
+
+.cellar_buttons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.cellar-btn {
+  all: unset;
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  color: white;
+  background: #357bad;
+  cursor: pointer;
+  border-radius: 2px;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  font-size: 100%;
+}
+
+.cellar-btn:hover {
+  background: #4d95c8;
+}
+
+.cellar-btn:active {
+  background: #2f6d99;
 }

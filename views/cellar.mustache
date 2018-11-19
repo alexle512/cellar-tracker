@@ -35,17 +35,17 @@
         </div>
       </div>
       <div id="nav-links-dropdown">
-        <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
-        <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
-        <div class="nav-link-container"><a class="nav-link"href="/logout"></a></div>
+        <div class="nav-link-container"><a class="nav-link-drop" href="/cellar">My Cellar</a></div>
+        <div class="nav-link-container"><a class="nav-link-drop"href="/reviews">My Reviews</a></div>
+        <div class="nav-link-container"><a class="nav-link-drop" href="/logout">Logout</a></div>
       </div>
     </div>
 <!-- End Nav Bar -->
-
+<div id="cellar-root">
   <h1 class="page_heading"> Welcome to {{username}}'s Cellar </h1>
-
+  <div id="cellar-results-container">
   {{#cellers}}
-    <div class="search-result-container">
+    <div class="cellar-result-container">
       <div class="search-info-container">
         <div class="item-image">
           <i class="fas fa-beer fa-3x"></i>
@@ -55,6 +55,8 @@
           <div class="item-category"> {{ category }} </div>
           <div class="item-creator">  {{ creator }} </div>
           <div class="item-review">  {{ review }} </div>
+          <div class="item-price"> {{price}} </div>
+          <div class="item-notes"> {{notes}} </div>
         <h6>***To add price and notes click Update ***</h6>
         </div>
       </div>
@@ -62,16 +64,19 @@
         <form action="/delete-cellar" method="POST">
           <input type="hidden" name="cellarId"
           value="{{id}}" />
-          <input type="submit" value="Remove" />
+          <input class="cellar-btn"  type="submit" value="Remove" />
         </form>
         <form action="/update-cellar/{{id}}" method="get">
           <input type="hidden" name="cellarId"
           value="{{id}}" />
-          <input type="submit" value="Update" />
+          <input class="cellar-btn" type="submit" value="Update" />
         </form>
       </div>
     </div>
   {{/cellers}}
+  </div>
+  </div>
+
 </body>
 
   <script>
@@ -79,7 +84,7 @@
       el.classList.toggle("change")
       const navLinksEl = document.getElementById("nav-links-dropdown")
       navLinksEl.classList.toggle("open")
-
     }
   </script>
+
 </html>

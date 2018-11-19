@@ -8,15 +8,15 @@
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
      <!-- Bootstrap CSS -->
      <link rel="stylesheet" type="text/css" href="/css/portal.css">
-     <link rel="stylesheet" href="/css/navigation.css">
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+     <link rel="stylesheet" href="/css/navigation.css">
 
-     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+     <script src="/js/jquery-3.3.1.min.js"></script>
+     <script src="/js/bootstrap.bundle.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
    </head>
    <body>
-     <div class="bg">
 <!-- Nav Bar -->
     <div id="nav">
       <div id="nav-main">
@@ -42,19 +42,19 @@
         </div>
       </div>
       <div id="nav-links-dropdown">
-        <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
-        <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
-        <div class="nav-link-container"><a class="nav-link"href="/logout">Logout</a></div>
+        <div class="nav-link-container"><a class="nav-link-drop" href="/cellar">My Cellar</a></div>
+        <div class="nav-link-container"><a class="nav-link-drop"href="/reviews">My Reviews</a></div>
+        <div class="nav-link-container"><a class="nav-link-drop" href="/logout">Logout</a></div>
       </div>
     </div>
 <!-- End Nav Bar -->
 
+  <div class="bg">
     <!-- Main Content -->
      <div id="frontPage">
         <div id='links'>
           <a href="/cellar">myCellar</a>
           <a href="/reviews">myReviews</a>
-          <a href="/profile">myProfile</a>
           <form action="/logout" method="post">
                  <button id="button" type="submit" class="btn btn-outline-warning btn-lg" >Sign Out</button>
                </form>

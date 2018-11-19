@@ -148,7 +148,6 @@ app.get('/cellar', function(req, res) {
       where: { user_id: req.session.userid }
     })
     .then(function(cellars) {
-      console.log(cellars)
       res.render('cellar', { cellers: cellars, username: req.session.username })
     })
 })
@@ -193,7 +192,7 @@ app.post('/update-cellar', function(req, res) {
         notes: notes
       })
       .then(function() {
-        res.render('update-cellar')
+        res.redirect('cellar')
       })
   })
 })
@@ -212,30 +211,67 @@ app.get('/update-cellar/:id', function(req, res) {
 
 // Reviews
 app.get('/reviews', function(req, res) {
-  models.review.findAll().then(function(reviews) {
-    res.render('review', { reviews: reviews })
+  const product = req.body.title || ''
+  models.review
+    .findAll({ where: { user_id: req.session.userid } })
+    .then(function(reviews) {
+      res.render('review', {
+        reviews: reviews,
+        product: product,
+        hasReviews: reviews.length > 0
+      })
+    })
+})
+
+app.post('/reviews-add', (req, res) => {
+  const product = req.body.title || ''
+  models.review
+    .findAll({ where: { user_id: req.session.userid } })
+    .then(function(reviews) {
+      res.render('review', {
+        reviews: reviews,
+        product: product,
+        hasReviews: reviews.length > 0
+      })
+    })
+})
+
+app.post('/reviews/:review_id/delete', (req, res) => {
+  const reviewId = req.params.review_id
+  models.review.findById(reviewId).then((reviewEntry) => {
+    reviewEntry.destroy()
+    res.redirect('/reviews')
   })
 })
 
 app.post('/reviews', function(req, res) {
-  let product = req.body.title
-  let rating = req.body.review
+  let product = req.body.product
+  let rating = req.body.rating
   let category = req.body.category
+  console.log(req.session.userid)
+  const userId = req.session.userid
 
   const review = models.review.build({
     rating: rating,
     product: product,
-    category: category
+    category: category,
+    user_id: userId
   })
 
   review.save().then(function() {
-    models.review.findAll().then(function(reviews) {
-      res.render('review', { reviews: reviews })
-    })
+    models.review
+      .findAll({ where: { user_id: req.session.userid } })
+      .then(function(reviews) {
+        res.render('review', {
+          reviews: reviews,
+          hasReviews: reviews.length > 0
+        })
+      })
   })
 })
 
 app.use((req, res, next) => {
   res.redirect('/myCellar')
 })
+
 module.exports = app

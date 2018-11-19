@@ -1,35 +1,109 @@
 <html>
-<head><head>
+<head>
+  <link rel="stylesheet" href="/css/search.css">
+  <link rel="stylesheet" href="/css/reviews.css">
+  <link rel="stylesheet" href="/css/navigation.css">
+  <title>Reviews</title>
+<head>
 <body>
 
-<form action="/reviews" method="POST">
-  Product:<br>
-  <input type="text" name="product" >
-  <br>
-  Rating (1-5):<br>
-  <input type="integer" name="rating">
-  <br><br>
-  Category:<br>
-  <select>
-  <option value="spirit">Spirit</option>
-  <option value="wine">Wine</option>
-  <option value="beer">Beer</option>
-  <option value="other">Other</option>
-</select>
-  <input type="submit" value="Submit">
-</form> 
+<!-- Nav Bar -->
+<div id="nav">
+  <div id="nav-main">
+    <div id="nav-burger" onclick="toggleBurger(this)">
+      <div id="burger-top"></div>
+      <div id="burger-mid"></div>
+      <div id="burger-bot"></div>
+    </div>
+    <div id="nav-title">
+      <a href="/myCellar">
+      <div class="nav-logo">C</div>ellar
+      </a>
+    </div>
+    <div id="nav-links">
+      <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
+      <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
+      <div class="nav-link-container"><a class="nav-link"href="/logout">Logout</a></div>
+    </div>
+    <div id="nav-search">
+      <form id="nav-search-form" action="/search/beer" method="post" >
+        <input id="nav-search-item-textbox" type="textbox" name="itemName">
+      </form>
+    </div>
+  </div>
+  <div id="nav-links-dropdown">
+    <div class="nav-link-container"><a class="nav-link-drop" href="/cellar">My Cellar</a></div>
+    <div class="nav-link-container"><a class="nav-link-drop"href="/reviews">My Reviews</a></div>
+    <div class="nav-link-container"><a class="nav-link-drop" href="/logout">Logout</a></div>
+  </div>
+</div>
+<!-- End Nav Bar -->
 
-<ul id="reviewsTable" >
-{{#reviews}}
-    <li>
-    {{product}}
-    {{rating}}
-    {{category}}
-    </li>
-{{/reviews}}
+<div id="reviews-root">
+  <form id="review-add-form" action="/reviews" method="POST">
+    Product:<br>
+    <input class="review-input" type="text" name="product" value="{{product}}">
+    <br>
+    Rating (1-5):<br>
+    <input class="review-input" type="integer" name="rating" required>
+    <br>
+    Category:<br>
+    <select id="category-select" name="category">
+      <option value="spirit">Spirit</option>
+      <option value="wine">Wine</option>
+      <option value="beer">Beer</option>
+      <option value="other">Other</option>
+    </select>
+    <br>
+    <input id="add-review-btn" type="submit" value="Add Review">
+  </form> 
 
-</ul>
+
+  <div id="reviews-container">
+    {{#hasReviews}}
+    <div id="reviews-title">My Reviews</div>
+    <div id="subtitle-container">
+      <div id="subtitle-item" class="reviews-subtitle">Item</div>
+      <div id="subtitle-rating" class="reviews-subtitle">Rating</div>
+    </div>
+    {{/hasReviews}}
+    {{#reviews}}
+      <div class="search-result-container">
+        <div class="search-info-container">
+
+          {{! <div class="item-image">
+          </div> }}
+
+          <div class="item-title-container">
+            <div class="item-title"> {{ product }} </div>
+            <div class="item-style">  {{ category }} </div>
+          </div>
+
+          <div class="review-info-container-wine">
+            <div class="item-review-wine"> 
+              {{ rating }} <i class="fas fa-star"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <form class="review-remove-form" action="/reviews/{{id}}/delete" method="post">
+          <input class="review-remove-btn" type="submit" value="Remove">
+        </form>
+      </div>
+    {{/reviews}}
+  </div>
+
+</div> <!-- End Reviews Root --> 
+
 
 
 </body>
+<script>
+  const toggleBurger = function(el) {
+    el.classList.toggle("change")
+    const navLinksEl = document.getElementById("nav-links-dropdown")
+    navLinksEl.classList.toggle("open")
+  }
+</script>
 </html>
