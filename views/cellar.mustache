@@ -54,9 +54,9 @@
           <div class="item-title"> {{ title }} </div>
           <div class="item-category"> {{ category }} </div>
           <div class="item-creator">  {{ creator }} </div>
-          <div class="item-review">  {{ review }} </div>
-          <div class="item-price">  {{ price }} </div>
-          <div class="item-notes">  {{ notes }} </div>
+          <div class="item-review"> Review Rating: {{ review }} </div>
+          <div class="item-price"> Price: ${{ price }} </div>
+          <div class="item-notes">  Notes: {{ notes }} </div>
         <h6>***To add price and notes click Update ***</h6>
         </div>
       </div>
@@ -66,7 +66,7 @@
           value="{{id}}" />
           <input type="submit" value="Remove" />
         </form>
-        <form action="/update-cellar/{{id}}" method="get">
+        <form action="/update-cellar/{{id}}" method="GET">
           <input type="hidden" name="cellarId"
           value="{{id}}" />
           <input type="submit" value="Update" />

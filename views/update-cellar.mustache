@@ -55,7 +55,7 @@
           <div class="item-review">  {{ review }} </div>
         </div>
       <div class="cellar_buttons">
-        <form action="/update-cellar" method="POST">
+        <form action="/cellar/{{id}}" method="POST">
           <input type="hidden" name="cellarId" value="{{id}}" />
         </br>
           <input type="number" name="price" value="{{price}}" placeholder="Enter Price Here....." />
