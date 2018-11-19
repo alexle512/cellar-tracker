@@ -41,11 +41,11 @@
       </div>
     </div>
 <!-- End Nav Bar -->
-
+<div id="cellar-root">
   <h1 class="page_heading"> Welcome to {{username}}'s Cellar </h1>
-
+  <div id="cellar-results-container">
   {{#cellers}}
-    <div class="search-result-container">
+    <div class="cellar-result-container">
       <div class="search-info-container">
         <div class="item-image">
           <i class="fas fa-beer fa-3x"></i>
@@ -64,16 +64,18 @@
         <form action="/delete-cellar" method="POST">
           <input type="hidden" name="cellarId"
           value="{{id}}" />
-          <input type="submit" value="Remove" />
+          <input class="cellar-btn"  type="submit" value="Remove" />
         </form>
         <form action="/update-cellar/{{id}}" method="get">
           <input type="hidden" name="cellarId"
           value="{{id}}" />
-          <input type="submit" value="Update" />
+          <input class="cellar-btn" type="submit" value="Update" />
         </form>
       </div>
     </div>
   {{/cellers}}
+  </div>
+  </div>
 
 </body>
 

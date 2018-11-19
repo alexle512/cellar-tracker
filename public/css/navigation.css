@@ -27,7 +27,7 @@
   font-weight: 500;
   font-size: 1.4em;
   letter-spacing: 3px;
-  color: #8a5ec7;
+  color: #357bad;
   width: 20%;
 }
 
@@ -37,7 +37,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #8a5ec7;
+  color: #357bad;
   cursor: pointer;
 }
 
@@ -82,7 +82,7 @@
   justify-content: center;
   align-items: center;
   margin-right: 0.2em;
-  border: 3px solid #8a5ec7;
+  border: 3px solid #357bad;
   width: 25px;
   height: 25px;
 }

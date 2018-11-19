@@ -110,6 +110,8 @@ module.exports = {
 }
 
 /**
+ * TODO implement next and previous buttons 
+ * 
 router.get("/:page", (req, res) => {
   let limit = 50 // number of records per page
   let offset = 0
