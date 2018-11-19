@@ -2,102 +2,102 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define(
-    "wine",
+    'winedata',
     {
       col1847: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "_col1847",
+        field: '_col1847',
         primaryKey: true
       },
       unnamed0: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "unnamed__0"
+        field: 'unnamed__0'
       },
       country: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "country"
+        field: 'country'
       },
       description: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "description"
+        field: 'description'
       },
       designation: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "designation"
+        field: 'designation'
       },
       points: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "points"
+        field: 'points'
       },
       price: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "price"
+        field: 'price'
       },
       province: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "province"
+        field: 'province'
       },
       region1: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "region_1"
+        field: 'region_1'
       },
       region2: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "region_2"
+        field: 'region_2'
       },
       tasterName: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "taster_name"
+        field: 'taster_name'
       },
       tasterTwitterHandle: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "taster_twitter_handle"
+        field: 'taster_twitter_handle'
       },
       title: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "title"
+        field: 'title'
       },
       variety: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "variety"
+        field: 'variety'
       },
       winery: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "winery"
+        field: 'winery'
       },
       reviewTotal: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "review_total"
+        field: 'review_total'
       },
       reviewCount: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "review_count"
+        field: 'review_count'
       },
       reviewAverage: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "review_average"
+        field: 'review_average'
       }
     },
     {
-      tableName: "wine",
+      tableName: 'winedata',
       timestamps: false
     }
   )
