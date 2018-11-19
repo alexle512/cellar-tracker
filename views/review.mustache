@@ -60,11 +60,13 @@
 
 
   <div id="reviews-container">
+    {{#hasReviews}}
     <div id="reviews-title">My Reviews</div>
     <div id="subtitle-container">
       <div id="subtitle-item" class="reviews-subtitle">Item</div>
       <div id="subtitle-rating" class="reviews-subtitle">Rating</div>
     </div>
+    {{/hasReviews}}
     {{#reviews}}
       <div class="search-result-container">
         <div class="search-info-container">

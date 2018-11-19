@@ -212,16 +212,28 @@ app.get('/update-cellar/:id', function(req, res) {
 // Reviews
 app.get('/reviews', function(req, res) {
   const product = req.body.title || ''
-  models.review.findAll().then(function(reviews) {
-    res.render('review', { reviews: reviews, product: product })
-  })
+  models.review
+    .findAll({ where: { user_id: req.session.userid } })
+    .then(function(reviews) {
+      res.render('review', {
+        reviews: reviews,
+        product: product,
+        hasReviews: reviews.length > 0
+      })
+    })
 })
 
 app.post('/reviews-add', (req, res) => {
   const product = req.body.title || ''
-  models.review.findAll().then(function(reviews) {
-    res.render('review', { reviews: reviews, product: product })
-  })
+  models.review
+    .findAll({ where: { user_id: req.session.userid } })
+    .then(function(reviews) {
+      res.render('review', {
+        reviews: reviews,
+        product: product,
+        hasReviews: reviews.length > 0
+      })
+    })
 })
 
 app.post('/reviews/:review_id/delete', (req, res) => {
@@ -236,17 +248,25 @@ app.post('/reviews', function(req, res) {
   let product = req.body.product
   let rating = req.body.rating
   let category = req.body.category
+  console.log(req.session.userid)
+  const userId = req.session.userid
 
   const review = models.review.build({
     rating: rating,
     product: product,
-    category: category
+    category: category,
+    user_id: userId
   })
 
   review.save().then(function() {
-    models.review.findAll().then(function(reviews) {
-      res.render('review', { reviews: reviews })
-    })
+    models.review
+      .findAll({ where: { user_id: req.session.userid } })
+      .then(function(reviews) {
+        res.render('review', {
+          reviews: reviews,
+          hasReviews: reviews.length > 0
+        })
+      })
   })
 })
 
