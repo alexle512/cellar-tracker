@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 // $primary: #;
 $primary-yellow: #ffc312;
@@ -15,12 +15,12 @@ body {
   background: #f5f2e8;
   display: flex;
   justify-content: center;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin-top: 15px;
 }
 
 #search-container {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   background: white;
   width: 40em;
   display: flex;
@@ -30,7 +30,7 @@ body {
 }
 
 #search-bar {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   background: #f9f9f9;
   display: flex;
   flex-direction: column;
@@ -231,6 +231,10 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+}
+
+.item-review-wine > .fas {
+  margin-left: 1em;
 }
 
 .item-add-container {

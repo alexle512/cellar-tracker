@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="css/cellar.css">
   </head>
   <body>
+
+<!-- Nav Bar -->
     <div id="nav">
       <div id="nav-main">
         <div id="nav-burger" onclick="toggleBurger(this)">
@@ -22,7 +24,7 @@
         <div id="nav-links">
           <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
           <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
-          <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
+          <div class="nav-link-container"><a class="nav-link"href="/logout">Logout</a></div>
         </div>
         <div id="nav-search">
           <form id="nav-search-form" action="/search/beer" method="post" >
@@ -31,14 +33,17 @@
         </div>
       </div>
       <div id="nav-links-dropdown">
-        <div class="nav-link-container"><a class="nav-link"href="/cellar">My Cellar</a></div>
-        <div class="nav-link-container"><a class="nav-link"href="/reviews">My Reviews</a></div>
-        <div class="nav-link-container"><a class="nav-link"href="/profile">Profile</a></div>
+        <div class="nav-link-container"><a class="nav-link-drop" href="/cellar">My Cellar</a></div>
+        <div class="nav-link-container"><a class="nav-link-drop"href="/reviews">My Reviews</a></div>
+        <div class="nav-link-container"><a class="nav-link-drop" href="/logout">Logout</a></div>
       </div>
     </div>
+<!-- End Nav Bar -->
 
     <h3> {{title}} has been deleted.... </h3>
-
+    <form action="/cellar" method="get">
+      <input type="submit" value="Back to your Cellar">
+    </form>
 
   </body>
   <script>
