@@ -192,7 +192,7 @@ app.post('/update-cellar', function(req, res) {
         notes: notes
       })
       .then(function() {
-        res.render('update-cellar')
+        res.redirect('cellar')
       })
   })
 })
