@@ -12,24 +12,7 @@ The Cellar application is for users only, no guest allowed. The home page has an
 
 ## Local Installation
 
-1. Download and install npm packages
-
-```
-git clone git@github.com:ttlekich/cellar-tracker.git
-npm install
-```
-
-2. Set .env varables
-
-```
-touch .env
-
-// .env
-PD_DB="DB name"
-PD_UN="DB username"
-PD_PW="DB password"
-PD_HOST="DB host"
-PD_PORT="DB port"
+![]
 ```
 
 ## Packages/Libraries Used
