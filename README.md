@@ -13,16 +13,16 @@ The Cellar application is for users only, no guest allowed. The home page has an
 ## Site Preview
 
 ![](public/css/cellar%201.jpg)
-```
-```
+
 
 ## Packages/Libraries Used
 
 - HTML, JavaScript, BootStrap, CSS, AWS, API
 
 ## Contributors
-
+```
 - [Owais Badat](https://github.com/OwaisBadat)
 - [Arlisha Hayles](https://github.com/Arlisha2019)
 - [Alex Le](https://github.com/alexle512)
 - [Travis Lekich](https://github.com/ttlekich)
+```
