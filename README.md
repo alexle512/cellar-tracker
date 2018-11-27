@@ -1,4 +1,4 @@
-# Cellar Tracker Web App :wine_glass: :beers: :cocktails: :tropical_drink:
+# :wine_glass: :beers: :cocktail: :tropical_drink: Cellar Tracker Web App :wine_glass: :beers: :cocktail: :tropical_drink:
 
 
 ## Description
