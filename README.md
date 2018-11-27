@@ -12,7 +12,7 @@ The Cellar application is for users only, no guest allowed. The home page has an
 
 ## Local Installation
 
-![](public/css/cellar%1.jpg)
+![](public/css/cellar%201.jpg)
 ```
 ```
 
