@@ -12,11 +12,11 @@ The Cellar application is for users only, no guest allowed. The home page has an
 
 ## Site Preview
 
-- ![](public/css/cellar%201.jpg)
+![](public/css/cellar%201.jpg)
 
 ## Site Link 
 
-[Cellar](https://dc-cellar.herokuapp.com/)
+- [Cellar](https://dc-cellar.herokuapp.com/)
 
 ## Packages/Libraries Used
 
