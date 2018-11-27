@@ -10,7 +10,7 @@ This web application allows user to save their favorite adult beverage to a digi
 The Cellar application is for users only, no guest allowed. The home page has an option to either register or sign in.   After signing in, users are directed to their profile page. On the profile page, users can choose to search for a beverage using the search bar in the top right corner, view My Cellar or view My Reviews. After searching for a beverage, the user has the option to add their desire beverage to My Cellar or Review that particular item. When a beverage is added to the cellar, that item is routed inside of the user’s cellar. Inside the cellar, that item could be updated to add the price and/or any special prices or removed from the cellar. Under the review section, users have the options to add reviews about an item. The user must enter the beverage name in order to do so. 
 
 
-## Local Installation
+## Site Preview
 
 ![](public/css/cellar%201.jpg)
 ```
